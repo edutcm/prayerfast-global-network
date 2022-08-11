@@ -5,21 +5,14 @@ import "leaflet.heat";
 import { checkIsClient } from "../../utils/client";
 import _ from "lodash";
 import { useStaticQuery, graphql } from "gatsby";
-import axio from "axios";
-
-// firestore
-import { useFirestoreQuery } from "../../services/firebase";
-import firebase from "firebase/compat/app";
-import "firebase/compat/firestore";
+import axios from "axios";
 
 // import css
 import "leaflet/dist/leaflet.css";
 
 // import components
-import { FirebaseContext } from "../../services/firebase";
 import { AppContext } from "../../services/app";
 import Loader from "../loader";
-import axios from "axios";
 
 interface MapProps {
   children?: React.ReactNode;
@@ -84,14 +77,6 @@ export const Map = ({ children }: MapProps) => {
   const { appCookies, setGeodata } = useContext(AppContext);
 
   if (!isClient) return null;
-
-  const { firestore } = useContext(FirebaseContext);
-
-  // const { data, status, error } = useFirestoreQuery(
-  //   firestore
-  //     ?.collection("geodata")
-  //     .limit(5000) as firebase.firestore.DocumentData
-  // );
 
   useEffect(() => {
     axios.get("/api/geodata").then((res) => {

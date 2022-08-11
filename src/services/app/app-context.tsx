@@ -2,7 +2,7 @@
 import { createContext } from "react";
 import { AppContextProps } from "./app-provider";
 
-// firebase context
+// app context
 const AppContext = createContext<AppContextProps>({
   geodata: [],
   setGeodata: () => [],

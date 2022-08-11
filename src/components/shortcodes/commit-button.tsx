@@ -9,7 +9,6 @@ import axios from "axios";
 import { AppContext } from "../../services/app";
 import { GatsbyImage, getImage, IGatsbyImageData } from "gatsby-plugin-image";
 import { ChevronDownIcon, ChevronRightIcon } from "@heroicons/react/solid";
-import { FirebaseContext } from "../../services/firebase";
 import Scoreboard from "../scoreboard";
 
 interface CommitButtonProps {
@@ -57,7 +56,6 @@ export const CommitButton = ({
 }: CommitButtonProps) => {
   const { appCookies, setPrayerFastButton, joinButton } =
     useContext(AppContext);
-  const { firestore } = useContext(FirebaseContext);
 
   const [join, toggleJoin] = useState(false);
   const [disabled, setDisabled] = useState(false);
