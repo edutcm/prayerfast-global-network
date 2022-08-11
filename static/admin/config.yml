@@ -1,0 +1,102 @@
+backend:
+  name: proxy
+  proxy_url: http://localhost:8081/api/v1
+  branch: main
+
+media_folder: static/assets
+public_folder: assets
+
+i18n:
+  structure: multiple_files
+  locales: [en, ar, bg, bn, cs, de, es, et, fr, hi, hu, in, pl, pt, ro, ru, tr, uk, zh]
+  default_locale: en
+
+collections:
+
+  - name: page
+    label: Pages
+    label_singular: Page
+    i18n: true
+    folder: content/pages
+    extension: mdx
+    format: frontmatter
+    identifier_field: slug
+    summary: "{{title}}"
+    create: true
+    fields:
+      - name: title
+        label: Title
+        i18n: true
+      - name: slug
+        label: slug
+        hint: "With starting forwards slash, ex: /about"
+        i18n: duplicate
+      - name: body
+        label: Content
+        i18n: true
+        widget: markdown
+      - name: image1
+        label: Image 1
+        i18n: duplicate
+        widget: image
+        choose_url: false
+        media_folder: .
+        required: false
+      - name: image2
+        label: Image 2
+        i18n: duplicate
+        widget: image
+        choose_url: false
+        media_folder: .
+        required: false
+      - name: image3
+        label: Image 3
+        i18n: duplicate
+        widget: image
+        choose_url: false
+        media_folder: .
+        required: false
+
+  - name: locales
+    label: Locales
+    i18n: true
+    folder: content/locales
+    extension: mdx
+    format: frontmatter
+    identifier_field: siteName
+    fields:
+      - name: siteName
+        label: Site Name
+        i18n: duplicate
+      - name: navigation
+        label: navigation
+        widget: object
+        i18n: true
+        collapsed: false
+        fields:
+          - name: home
+            label: Home
+            i18n: true
+            required: false
+          - name: resources
+            label: Resources
+            i18n: true
+            required: false
+          - name: mobilize
+            label: Mobilize
+            i18n: true
+            required: false
+      - name: misc
+        label: Miscellaneous Strings
+        widget: object
+        i18n: true
+        collapsed: false
+        fields:
+          - name: chooseLanguage
+            label: Choose a language
+            i18n: true
+            required: false
+          - name: close
+            label: Close
+            i18n: true
+            required: false
