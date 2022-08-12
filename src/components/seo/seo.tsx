@@ -1,9 +1,10 @@
 // import libs
-import React from "react";
+import React, { useEffect } from "react";
 import { PageContextProps } from "../../gatsby/data-props";
 import { rtl } from "../../services/locales";
 import { useStaticQuery, graphql } from "gatsby";
 import { getSrc } from "gatsby-plugin-image";
+import { checkIsClient } from "../../utils/client";
 
 interface SeoProps {
   siteName: string;
@@ -35,6 +36,16 @@ const Seo = ({ siteName, pageContext }: SeoProps) => {
       }
     }
   `);
+
+  const isClient = checkIsClient();
+
+  // modify html attributes
+  useEffect(() => {
+    if (isClient) {
+      document.documentElement.lang = pageContext.locale;
+      document.documentElement.dir = isRTL ? "rtl" : "ltr";
+    }
+  }, [pageContext.locale, isRTL]);
 
   // share image
   const shareImage = `${site.siteMetadata.siteUrl}${getSrc(socialGraphic)}`;
