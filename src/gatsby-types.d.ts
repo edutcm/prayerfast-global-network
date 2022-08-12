@@ -2820,6 +2820,7 @@ type Query = {
   readonly allFile: FileConnection;
   readonly allImageSharp: ImageSharpConnection;
   readonly allMdx: MdxConnection;
+  readonly allMongodbPrayerfastGeodata: mongodbPrayerfastGeodataConnection;
   readonly allSite: SiteConnection;
   readonly allSiteBuildMetadata: SiteBuildMetadataConnection;
   readonly allSiteFunction: SiteFunctionConnection;
@@ -2831,6 +2832,7 @@ type Query = {
   readonly imageSharp: Maybe<ImageSharp>;
   readonly localesByLocale: Maybe<Mdx>;
   readonly mdx: Maybe<Mdx>;
+  readonly mongodbPrayerfastGeodata: Maybe<mongodbPrayerfastGeodata>;
   readonly pageByLocale: Maybe<Mdx>;
   readonly site: Maybe<Site>;
   readonly siteBuildMetadata: Maybe<SiteBuildMetadata>;
@@ -2877,6 +2879,14 @@ type Query_allMdxArgs = {
   limit: InputMaybe<Scalars['Int']>;
   skip: InputMaybe<Scalars['Int']>;
   sort: InputMaybe<MdxSortInput>;
+};
+
+
+type Query_allMongodbPrayerfastGeodataArgs = {
+  filter: InputMaybe<mongodbPrayerfastGeodataFilterInput>;
+  limit: InputMaybe<Scalars['Int']>;
+  skip: InputMaybe<Scalars['Int']>;
+  sort: InputMaybe<mongodbPrayerfastGeodataSortInput>;
 };
 
 
@@ -3055,6 +3065,28 @@ type Query_mdxArgs = {
   tableOfContents: InputMaybe<JSONQueryOperatorInput>;
   timeToRead: InputMaybe<IntQueryOperatorInput>;
   wordCount: InputMaybe<MdxWordCountFilterInput>;
+};
+
+
+type Query_mongodbPrayerfastGeodataArgs = {
+  areaGeo: InputMaybe<IntQueryOperatorInput>;
+  children: InputMaybe<NodeFilterListInput>;
+  city: InputMaybe<StringQueryOperatorInput>;
+  cityGeo: InputMaybe<IntQueryOperatorInput>;
+  cont: InputMaybe<StringQueryOperatorInput>;
+  count: InputMaybe<IntQueryOperatorInput>;
+  country: InputMaybe<StringQueryOperatorInput>;
+  countryGeo: InputMaybe<IntQueryOperatorInput>;
+  id: InputMaybe<StringQueryOperatorInput>;
+  internal: InputMaybe<InternalFilterInput>;
+  langKey: InputMaybe<StringQueryOperatorInput>;
+  lat: InputMaybe<FloatQueryOperatorInput>;
+  lon: InputMaybe<FloatQueryOperatorInput>;
+  mongodb_id: InputMaybe<StringQueryOperatorInput>;
+  parent: InputMaybe<NodeFilterInput>;
+  tz: InputMaybe<StringQueryOperatorInput>;
+  tzCode: InputMaybe<StringQueryOperatorInput>;
+  tzOffset: InputMaybe<IntQueryOperatorInput>;
 };
 
 
@@ -4317,6 +4349,241 @@ type TransformOptions = {
 
 type WebPOptions = {
   readonly quality: InputMaybe<Scalars['Int']>;
+};
+
+type mongodbPrayerfastGeodata = Node & {
+  readonly areaGeo: Maybe<Scalars['Int']>;
+  readonly children: ReadonlyArray<Node>;
+  readonly city: Maybe<Scalars['String']>;
+  readonly cityGeo: Maybe<Scalars['Int']>;
+  readonly cont: Maybe<Scalars['String']>;
+  readonly count: Maybe<Scalars['Int']>;
+  readonly country: Maybe<Scalars['String']>;
+  readonly countryGeo: Maybe<Scalars['Int']>;
+  readonly id: Scalars['ID'];
+  readonly internal: Internal;
+  readonly langKey: Maybe<Scalars['String']>;
+  readonly lat: Maybe<Scalars['Float']>;
+  readonly lon: Maybe<Scalars['Float']>;
+  readonly mongodb_id: Maybe<Scalars['String']>;
+  readonly parent: Maybe<Node>;
+  readonly tz: Maybe<Scalars['String']>;
+  readonly tzCode: Maybe<Scalars['String']>;
+  readonly tzOffset: Maybe<Scalars['Int']>;
+};
+
+type mongodbPrayerfastGeodataConnection = {
+  readonly distinct: ReadonlyArray<Scalars['String']>;
+  readonly edges: ReadonlyArray<mongodbPrayerfastGeodataEdge>;
+  readonly group: ReadonlyArray<mongodbPrayerfastGeodataGroupConnection>;
+  readonly max: Maybe<Scalars['Float']>;
+  readonly min: Maybe<Scalars['Float']>;
+  readonly nodes: ReadonlyArray<mongodbPrayerfastGeodata>;
+  readonly pageInfo: PageInfo;
+  readonly sum: Maybe<Scalars['Float']>;
+  readonly totalCount: Scalars['Int'];
+};
+
+
+type mongodbPrayerfastGeodataConnection_distinctArgs = {
+  field: mongodbPrayerfastGeodataFieldsEnum;
+};
+
+
+type mongodbPrayerfastGeodataConnection_groupArgs = {
+  field: mongodbPrayerfastGeodataFieldsEnum;
+  limit: InputMaybe<Scalars['Int']>;
+  skip: InputMaybe<Scalars['Int']>;
+};
+
+
+type mongodbPrayerfastGeodataConnection_maxArgs = {
+  field: mongodbPrayerfastGeodataFieldsEnum;
+};
+
+
+type mongodbPrayerfastGeodataConnection_minArgs = {
+  field: mongodbPrayerfastGeodataFieldsEnum;
+};
+
+
+type mongodbPrayerfastGeodataConnection_sumArgs = {
+  field: mongodbPrayerfastGeodataFieldsEnum;
+};
+
+type mongodbPrayerfastGeodataEdge = {
+  readonly next: Maybe<mongodbPrayerfastGeodata>;
+  readonly node: mongodbPrayerfastGeodata;
+  readonly previous: Maybe<mongodbPrayerfastGeodata>;
+};
+
+type mongodbPrayerfastGeodataFieldsEnum =
+  | 'areaGeo'
+  | 'children'
+  | 'children.children'
+  | 'children.children.children'
+  | 'children.children.children.children'
+  | 'children.children.children.id'
+  | 'children.children.id'
+  | 'children.children.internal.content'
+  | 'children.children.internal.contentDigest'
+  | 'children.children.internal.description'
+  | 'children.children.internal.fieldOwners'
+  | 'children.children.internal.ignoreType'
+  | 'children.children.internal.mediaType'
+  | 'children.children.internal.owner'
+  | 'children.children.internal.type'
+  | 'children.children.parent.children'
+  | 'children.children.parent.id'
+  | 'children.id'
+  | 'children.internal.content'
+  | 'children.internal.contentDigest'
+  | 'children.internal.description'
+  | 'children.internal.fieldOwners'
+  | 'children.internal.ignoreType'
+  | 'children.internal.mediaType'
+  | 'children.internal.owner'
+  | 'children.internal.type'
+  | 'children.parent.children'
+  | 'children.parent.children.children'
+  | 'children.parent.children.id'
+  | 'children.parent.id'
+  | 'children.parent.internal.content'
+  | 'children.parent.internal.contentDigest'
+  | 'children.parent.internal.description'
+  | 'children.parent.internal.fieldOwners'
+  | 'children.parent.internal.ignoreType'
+  | 'children.parent.internal.mediaType'
+  | 'children.parent.internal.owner'
+  | 'children.parent.internal.type'
+  | 'children.parent.parent.children'
+  | 'children.parent.parent.id'
+  | 'city'
+  | 'cityGeo'
+  | 'cont'
+  | 'count'
+  | 'country'
+  | 'countryGeo'
+  | 'id'
+  | 'internal.content'
+  | 'internal.contentDigest'
+  | 'internal.description'
+  | 'internal.fieldOwners'
+  | 'internal.ignoreType'
+  | 'internal.mediaType'
+  | 'internal.owner'
+  | 'internal.type'
+  | 'langKey'
+  | 'lat'
+  | 'lon'
+  | 'mongodb_id'
+  | 'parent.children'
+  | 'parent.children.children'
+  | 'parent.children.children.children'
+  | 'parent.children.children.id'
+  | 'parent.children.id'
+  | 'parent.children.internal.content'
+  | 'parent.children.internal.contentDigest'
+  | 'parent.children.internal.description'
+  | 'parent.children.internal.fieldOwners'
+  | 'parent.children.internal.ignoreType'
+  | 'parent.children.internal.mediaType'
+  | 'parent.children.internal.owner'
+  | 'parent.children.internal.type'
+  | 'parent.children.parent.children'
+  | 'parent.children.parent.id'
+  | 'parent.id'
+  | 'parent.internal.content'
+  | 'parent.internal.contentDigest'
+  | 'parent.internal.description'
+  | 'parent.internal.fieldOwners'
+  | 'parent.internal.ignoreType'
+  | 'parent.internal.mediaType'
+  | 'parent.internal.owner'
+  | 'parent.internal.type'
+  | 'parent.parent.children'
+  | 'parent.parent.children.children'
+  | 'parent.parent.children.id'
+  | 'parent.parent.id'
+  | 'parent.parent.internal.content'
+  | 'parent.parent.internal.contentDigest'
+  | 'parent.parent.internal.description'
+  | 'parent.parent.internal.fieldOwners'
+  | 'parent.parent.internal.ignoreType'
+  | 'parent.parent.internal.mediaType'
+  | 'parent.parent.internal.owner'
+  | 'parent.parent.internal.type'
+  | 'parent.parent.parent.children'
+  | 'parent.parent.parent.id'
+  | 'tz'
+  | 'tzCode'
+  | 'tzOffset';
+
+type mongodbPrayerfastGeodataFilterInput = {
+  readonly areaGeo: InputMaybe<IntQueryOperatorInput>;
+  readonly children: InputMaybe<NodeFilterListInput>;
+  readonly city: InputMaybe<StringQueryOperatorInput>;
+  readonly cityGeo: InputMaybe<IntQueryOperatorInput>;
+  readonly cont: InputMaybe<StringQueryOperatorInput>;
+  readonly count: InputMaybe<IntQueryOperatorInput>;
+  readonly country: InputMaybe<StringQueryOperatorInput>;
+  readonly countryGeo: InputMaybe<IntQueryOperatorInput>;
+  readonly id: InputMaybe<StringQueryOperatorInput>;
+  readonly internal: InputMaybe<InternalFilterInput>;
+  readonly langKey: InputMaybe<StringQueryOperatorInput>;
+  readonly lat: InputMaybe<FloatQueryOperatorInput>;
+  readonly lon: InputMaybe<FloatQueryOperatorInput>;
+  readonly mongodb_id: InputMaybe<StringQueryOperatorInput>;
+  readonly parent: InputMaybe<NodeFilterInput>;
+  readonly tz: InputMaybe<StringQueryOperatorInput>;
+  readonly tzCode: InputMaybe<StringQueryOperatorInput>;
+  readonly tzOffset: InputMaybe<IntQueryOperatorInput>;
+};
+
+type mongodbPrayerfastGeodataGroupConnection = {
+  readonly distinct: ReadonlyArray<Scalars['String']>;
+  readonly edges: ReadonlyArray<mongodbPrayerfastGeodataEdge>;
+  readonly field: Scalars['String'];
+  readonly fieldValue: Maybe<Scalars['String']>;
+  readonly group: ReadonlyArray<mongodbPrayerfastGeodataGroupConnection>;
+  readonly max: Maybe<Scalars['Float']>;
+  readonly min: Maybe<Scalars['Float']>;
+  readonly nodes: ReadonlyArray<mongodbPrayerfastGeodata>;
+  readonly pageInfo: PageInfo;
+  readonly sum: Maybe<Scalars['Float']>;
+  readonly totalCount: Scalars['Int'];
+};
+
+
+type mongodbPrayerfastGeodataGroupConnection_distinctArgs = {
+  field: mongodbPrayerfastGeodataFieldsEnum;
+};
+
+
+type mongodbPrayerfastGeodataGroupConnection_groupArgs = {
+  field: mongodbPrayerfastGeodataFieldsEnum;
+  limit: InputMaybe<Scalars['Int']>;
+  skip: InputMaybe<Scalars['Int']>;
+};
+
+
+type mongodbPrayerfastGeodataGroupConnection_maxArgs = {
+  field: mongodbPrayerfastGeodataFieldsEnum;
+};
+
+
+type mongodbPrayerfastGeodataGroupConnection_minArgs = {
+  field: mongodbPrayerfastGeodataFieldsEnum;
+};
+
+
+type mongodbPrayerfastGeodataGroupConnection_sumArgs = {
+  field: mongodbPrayerfastGeodataFieldsEnum;
+};
+
+type mongodbPrayerfastGeodataSortInput = {
+  readonly fields: InputMaybe<ReadonlyArray<InputMaybe<mongodbPrayerfastGeodataFieldsEnum>>>;
+  readonly order: InputMaybe<ReadonlyArray<InputMaybe<SortOrderEnum>>>;
 };
 
 type GatsbyImageSharpFixedFragment = { readonly base64: string | null, readonly width: number, readonly height: number, readonly src: string, readonly srcSet: string };

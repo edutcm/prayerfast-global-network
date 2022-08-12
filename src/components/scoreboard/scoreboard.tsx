@@ -81,18 +81,18 @@ const Scoreboard = ({
       <Counter
         text={people}
         count={totalPeople}
-        className="flex justify-center items-center h-9 grow border-slate-700 border-r border-b"
+        className="flex justify-center items-center h-9 grow border-slate-700 border-r border-b md:border-b-0"
       />
       <Counter
         text={languages}
         count={totalLanguages}
-        className="flex justify-center items-center h-9 grow border-slate-700 border-r border-b"
+        className="flex justify-center items-center h-9 grow border-slate-700 border-r border-b md:border-b-0"
       />
       <div className="basis-full h-0 md:basis-0" />
       <Counter
         text={cities}
         count={totalCities}
-        className="flex justify-center items-center h-9 grow border-slate-700 border-r border-b"
+        className="flex justify-center items-center h-9 grow border-slate-700 border-r border-b md:border-b-0"
       />
       <Counter
         text={countries}
