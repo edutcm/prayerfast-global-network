@@ -210,13 +210,6 @@ export const CommitButton = ({
             countries={countries}
             timezones={timezones}
           />
-          {/* {geodata && geodata.length > 0 && (
-            <div className="text-center">
-              <div className="text-xs md:text-xs text-slate-500 italic">
-                {count.replace("{{count}}", totalPeople.toString())}
-              </div>
-            </div>
-          )} */}
         </div>
       </div>
     </div>

@@ -1,11 +1,10 @@
 // import libs
-import React from "react";
+import React, { useEffect } from "react";
 import { PageContextProps } from "../../gatsby/data-props";
 import { rtl } from "../../services/locales";
 import { useStaticQuery, graphql } from "gatsby";
-
-// import components
-// import { Helmet } from "react-helmet-async";
+import { getSrc } from "gatsby-plugin-image";
+import { checkIsClient } from "../../utils/client";
 
 interface SeoProps {
   siteName: string;
@@ -19,16 +18,12 @@ const Seo = ({ siteName, pageContext }: SeoProps) => {
     query {
       logo: file(relativePath: { eq: "favicon.png" }) {
         childImageSharp {
-          fixed(width: 32) {
-            src
-          }
+          gatsbyImageData(layout: FIXED, width: 32)
         }
       }
       socialGraphic: file(relativePath: { eq: "social.jpg" }) {
         childImageSharp {
-          fixed(width: 1200) {
-            src
-          }
+          gatsbyImageData(layout: FIXED, width: 1200)
         }
       }
       site {
@@ -42,8 +37,18 @@ const Seo = ({ siteName, pageContext }: SeoProps) => {
     }
   `);
 
+  const isClient = checkIsClient();
+
+  // modify html attributes
+  useEffect(() => {
+    if (isClient) {
+      document.documentElement.lang = pageContext.locale;
+      document.documentElement.dir = isRTL ? "rtl" : "ltr";
+    }
+  }, [pageContext.locale, isRTL]);
+
   // share image
-  const shareImage = `${site.siteMetadata.siteUrl}${socialGraphic.childImageSharp.fixed.src}`;
+  const shareImage = `${site.siteMetadata.siteUrl}${getSrc(socialGraphic)}`;
 
   // page url
   const pageUrl = `${site.siteMetadata.siteUrl}/${pageContext.locale}${pageContext.navSlug}`;
@@ -97,28 +102,13 @@ const Seo = ({ siteName, pageContext }: SeoProps) => {
   ];
 
   return (
-    // <Helmet
-    //   htmlAttributes={{
-    //     lang: pageContext.locale,
-    //     dir: isRTL ? "rtl" : "ltr",
-    //   }}
-    //   title={pageContext.title}
-    //   titleTemplate={`%s | ${siteName}`}
-    //   link={[
-    //     {
-    //       rel: "canonical",
-    //       href: pageUrl,
-    //     },
-    //   ]}
-    //   meta={meta}
-    // >
     <>
       <title>{`${pageContext.title} | ${siteName}`}</title>
       <link rel="canonical" href={pageUrl} />
       <link
         rel="icon"
         type="image/png"
-        href={logo.childImageSharp.fixed.src || ""}
+        href={getSrc(logo) || ""}
         sizes="16x16"
       />
       {meta.map((item, idx) => {

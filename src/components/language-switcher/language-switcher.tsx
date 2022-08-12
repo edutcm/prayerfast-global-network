@@ -23,7 +23,9 @@ const LanguageSelector = ({ pageContext, locales }: LanguageSelectorProps) => {
   const changeLocale = (locale: string) => {
     const navigateTo = getLocalizedPath(pageContext.navSlug, locale);
     navigate(navigateTo);
-    toggleSwitcher(!switcher);
+    if (toggleSwitcher) {
+      toggleSwitcher(!switcher);
+    }
   };
 
   if (!switcher) return null;

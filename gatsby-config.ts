@@ -78,6 +78,14 @@ const config: GatsbyConfig = {
       options: {},
     },
     {
+      resolve: "gatsby-source-mongodb",
+      options: {
+        dbName: "prayerfast",
+        collection: "geodata",
+        connectionString: `mongodb+srv://${process.env.GATSBY_MONGODB_USER}:${process.env.GATSBY_MONGODB_PASS}@${process.env.GATSBY_MONGODB_URL}`,
+      },
+    },
+    {
       resolve: "gatsby-source-filesystem",
       options: {
         name: "images",

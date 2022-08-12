@@ -11,9 +11,9 @@ import Seo from "../components/seo";
 const Page = ({ data, pageContext }: DataProps) => (
   <Layout data={data} pageContext={pageContext}>
     <MDXRenderer
-      image1={data.page.frontmatter.image1}
-      image2={data.page.frontmatter.image2}
-      locale={pageContext.locale}
+      image1={data.page.frontmatter.image1 || null}
+      image2={data.page.frontmatter.image2 || null}
+      locale={pageContext.locale || "en"}
     >
       {data.page.body}
     </MDXRenderer>

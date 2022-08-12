@@ -31,15 +31,33 @@ export default async function handler(
   res: GatsbyFunctionResponse
 ) {
   // get the mongodb secret
-  const secret = process.env.GATSBY_MONGODB_SECRET;
+  const pass = process.env.GATSBY_MONGODB_PASS;
+  const user = process.env.GATSBY_MONGODB_USER;
+  const url = process.env.GATSBY_MONGODB_URL;
 
-  const uri = `mongodb+srv://pgnadmin:${secret}@prayerfastgn.rwtdz.mongodb.net/?retryWrites=true&w=majority`;
+  // build the mongodb connection url
+  const uri = `mongodb+srv://${user}:${pass}@${url}/?retryWrites=true&w=majority&compressors=zstd`;
 
-  // check for secret
-  if (typeof secret === "undefined" || secret === "") {
+  // check for url
+  if (typeof url === "undefined" || url === "") {
+    return res.status(500).json({
+      error: "The GATSBY_MONGODB_URL environment variable is not set, exiting.",
+    });
+  }
+
+  // check for user
+  if (typeof user === "undefined" || user === "") {
     return res.status(500).json({
       error:
-        "The GATSBY_MONGODB_SECRET environment variable is not set, exiting.",
+        "The GATSBY_MONGODB_USER environment variable is not set, exiting.",
+    });
+  }
+
+  // check for pass
+  if (typeof pass === "undefined" || pass === "") {
+    return res.status(500).json({
+      error:
+        "The GATSBY_MONGODB_PASS environment variable is not set, exiting.",
     });
   }
 

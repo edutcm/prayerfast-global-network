@@ -4,10 +4,9 @@ import { PageContextProps } from "../../gatsby/data-props";
 
 // import providers
 import { CookiesProvider } from "react-cookie";
-import { HelmetProvider } from "react-helmet-async";
+import { AppProvider } from "../../services/app";
 
 // import components
-import Seo from "../seo";
 import Navigation from "../navigation";
 import LanguageSwitcher from "../language-switcher";
 import Main from "../main";
@@ -23,19 +22,15 @@ const Layout = ({ children, pageContext, data }: LayoutProps) => {
 
   return (
     <CookiesProvider>
-      {/* <HelmetProvider> */}
-      {/* <Seo
-          siteName={locales.frontmatter.siteName}
-          pageContext={pageContext}
-        /> */}
-      <div className="flex flex-col md:flex-row md:rtl:flex-row-reverse bg-slate-900 font-montserrat">
-        <Main>{children}</Main>
-        <div className="w-screen md:w-[100px] h-[90px] md:h-screen">
-          <Navigation pageContext={pageContext} locales={locales} />
+      <AppProvider>
+        <div className="flex flex-col md:flex-row md:rtl:flex-row-reverse bg-slate-900 font-montserrat">
+          <Main>{children}</Main>
+          <div className="w-screen md:w-[100px] h-[90px] md:h-screen">
+            <Navigation pageContext={pageContext} locales={locales} />
+          </div>
         </div>
-      </div>
-      <LanguageSwitcher pageContext={pageContext} locales={locales} />
-      {/* </HelmetProvider> */}
+        <LanguageSwitcher pageContext={pageContext} locales={locales} />
+      </AppProvider>
     </CookiesProvider>
   );
 };

@@ -84,7 +84,9 @@ const Navigation = ({ pageContext, locales }: NavigationProps) => {
           activeSlug={pageContext.navSlug}
           label={languageLabel?.label}
           Icon={<TranslateIcon className="h-5 w-5" />}
-          onClick={() => toggleSwitcher(!switcher)}
+          onClick={() => {
+            if (toggleSwitcher) toggleSwitcher(!switcher);
+          }}
           pageContext={pageContext}
         />
       )}
