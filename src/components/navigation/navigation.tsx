@@ -138,7 +138,7 @@ const NavigationItem = ({
     >
       {Icon}
       <span
-        className={`text-xs ${
+        className={`text-xs w-full text-center ${
           active
             ? "text-emerald-300"
             : "text-white group-hover:text-emerald-300"

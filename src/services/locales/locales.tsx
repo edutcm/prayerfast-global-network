@@ -5,18 +5,18 @@ export const locales = [
     key: "en",
     label: "English",
   },
-  // {
-  //   key: "ar",
-  //   label: "عربي",
-  // },
+  {
+    key: "ar",
+    label: "عربي",
+  },
   {
     key: "bg",
     label: "български",
   },
-  // {
-  //   key: "bn",
-  //   label: "বাংলা",
-  // },
+  {
+    key: "bn",
+    label: "বাংলা",
+  },
   {
     key: "cs",
     label: "Česky",
@@ -29,34 +29,34 @@ export const locales = [
     key: "es",
     label: "Español",
   },
-  // {
-  //   key: "et",
-  //   label: "Eesti",
-  // },
+  {
+    key: "et",
+    label: "Eesti",
+  },
   {
     key: "fr",
     label: "Français",
   },
-  // {
-  //   key: "hi",
-  //   label: "हिन्दी",
-  // },
-  // {
-  //   key: "hu",
-  //   label: "Magyar",
-  // },
-  // {
-  //   key: "in",
-  //   label: "Indonesia",
-  // },
+  {
+    key: "hi",
+    label: "हिन्दी",
+  },
+  {
+    key: "hu",
+    label: "Magyar",
+  },
+  {
+    key: "in",
+    label: "Indonesia",
+  },
   {
     key: "pl",
     label: "Polski",
   },
-  // {
-  //   key: "pt",
-  //   label: "Português",
-  // },
+  {
+    key: "pt",
+    label: "Português",
+  },
   {
     key: "ro",
     label: "Românesc",
@@ -69,12 +69,12 @@ export const locales = [
     key: "tr",
     label: "Türk",
   },
-  // {
-  //   key: "uk",
-  //   label: "українська",
-  // },
-  // {
-  //   key: "zh",
-  //   label: "普通话",
-  // },
+  {
+    key: "uk",
+    label: "українська",
+  },
+  {
+    key: "zh",
+    label: "普通话",
+  },
 ];
