@@ -47,7 +47,7 @@ const Navigation = ({ pageContext, locales }: NavigationProps) => {
   const homeUrl = getLocalizedPath("/", pageContext.locale);
 
   return (
-    <nav className="flex md:flex-col justify-between px-20 md:px-0 items-center h-full md:pt-5 md:justify-start">
+    <nav className="flex md:flex-col justify-between px-10 md:px-0 items-center h-full md:pt-5 md:justify-start">
       {logoImage && (
         <Link to={homeUrl} className="hidden md:block">
           <GatsbyImage
@@ -116,7 +116,7 @@ const NavigationItem = ({
   if (onClick) {
     return (
       <div
-        className={`flex justify-center items-center py-2 px-3 flex-col cursor-pointer ${
+        className={`flex md:justify-center gap-3 items-center py-2 px-3 md:flex-col cursor-pointer ${
           active ? "text-emerald-300" : "text-white hover:text-emerald-300"
         }`}
         onClick={() => onClick()}
@@ -131,7 +131,7 @@ const NavigationItem = ({
 
   return (
     <Link
-      className={`flex justify-center items-center py-2 px-3 flex-col group text-white ${
+      className={`flex md:justify-center gap-3 items-center py-2 px-3 md:flex-col group text-white ${
         active ? "text-emerald-300" : "text-white hover:text-emerald-300"
       }`}
       to={localizedUrl}
