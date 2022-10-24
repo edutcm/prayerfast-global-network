@@ -107,7 +107,7 @@ export const StaticMap = ({ children }: MapProps) => {
     // leaflet map
     const map = L.map("map", {
       zoomControl: true,
-      attributionControl: false,
+      attributionControl: true,
       minZoom: 2.15,
       maxZoom: 8,
       zoomSnap: 0.25,
