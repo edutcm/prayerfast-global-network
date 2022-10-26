@@ -93,7 +93,7 @@ module.exports = async ({ actions, graphql, reporter }) => {
       if (slug === "index") {
         return "/";
       } else {
-        return `/${slug}/`;
+        return `/${slug}`;
       }
     };
 

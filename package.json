@@ -78,7 +78,7 @@
     "@babel/cli": "^7.18.10",
     "@babel/core": "^7.18.10",
     "@babel/plugin-proposal-decorators": "^7.18.10",
-    "@netlify/plugin-gatsby": "^3.4.1",
+    "@netlify/plugin-gatsby": "^3.4.8",
     "@types/leaflet": "^1.7.11",
     "@types/leaflet.heat": "^0.2.1",
     "@types/loadable__component": "^5.13.4",

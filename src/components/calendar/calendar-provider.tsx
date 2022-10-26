@@ -3,6 +3,8 @@ import React, { FC, useEffect, useState } from "react";
 import { CalendarContext, defaultState } from "./calendar-context";
 import type { IWeeksProps, IDaysProps, IMealsProps } from "./calendar-context";
 import axios from "axios";
+import merge from "lodash/merge";
+import find from "lodash/find";
 
 // calendar provider
 export const CalendarProvider: FC<{ children: React.ReactNode }> = ({
@@ -35,6 +37,8 @@ export const CalendarProvider: FC<{ children: React.ReactNode }> = ({
 
   const [calendar, setCalendar] = useState<any>(defaultState.calendar);
 
+  const [myCalendar, setMyCalendarFn] = useState<any>(defaultState.myCalendar);
+
   useEffect(() => {
     updateCalendar();
   }, []);
@@ -43,6 +47,38 @@ export const CalendarProvider: FC<{ children: React.ReactNode }> = ({
     axios.get("/api/calendar").then((res) => {
       setCalendar(res.data);
     });
+  };
+
+  const setMyCalendar = (
+    weekData: number,
+    dayData: string,
+    timeData: number[]
+  ) => {
+    console.log(myCalendar);
+
+    // build items
+    let items: any = [];
+    timeData.forEach((time) => {
+      const data = {
+        week: weekData,
+        day: dayData,
+        time: time,
+      };
+      items.push(data);
+    });
+
+    // clone myCalendar data
+    const myCalendarData = JSON.parse(JSON.stringify(myCalendar));
+
+    // add items to myCalendar
+    items.forEach((item: any) => {
+      const match = find(myCalendarData, item);
+      if (!match) {
+        myCalendarData.push(item);
+      }
+    });
+
+    setMyCalendarFn(myCalendarData);
   };
 
   return (
@@ -55,6 +91,8 @@ export const CalendarProvider: FC<{ children: React.ReactNode }> = ({
         calendar,
         setCalendar,
         updateCalendar,
+        myCalendar,
+        setMyCalendar,
       }}
     >
       {children}

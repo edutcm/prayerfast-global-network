@@ -4,7 +4,7 @@ import filter from "lodash/filter";
 import { useCalendarContext } from "./calendar-context";
 
 export const CalendarView = () => {
-  const { calendar, setCalendar, days, weeks, hours } = useCalendarContext();
+  const { days, weeks, hours } = useCalendarContext();
 
   return (
     <div className="bg-slate-900 text-white p-5 md:p-10 space-y-3">
@@ -40,19 +40,17 @@ export const CalendarView = () => {
                           key={`${weekday}-${widx}-${hidx}`}
                           className="flex-grow-0 w-1/4 md:w-1/6 flex justify-center items-center my-[3px]"
                         >
-                          <div className="w-3 h-3 md:w-4 md:h-4 rounded-full bg-slate-800 overflow-hidden">
+                          <div className="relative w-3 h-3 md:w-4 md:h-4 rounded-full bg-slate-800 overflow-hidden">
                             <TimeCircle
                               time={`${hour}:00`}
                               week={week.key}
                               weekday={weekday}
-                              calendar={calendar}
                               position="left"
                             />
                             <TimeCircle
                               time={`${hour}:30`}
                               week={week.key}
                               weekday={weekday}
-                              calendar={calendar}
                               position="right"
                             />
                           </div>
@@ -74,36 +72,43 @@ interface TimeCircleProps {
   time: any;
   week: any;
   weekday: any;
-  calendar: any;
   position: string;
 }
 
-const TimeCircle = ({
-  time,
-  week,
-  weekday,
-  calendar,
-  position,
-}: TimeCircleProps) => {
+const TimeCircle = ({ time, week, weekday, position }: TimeCircleProps) => {
   const params = {
     week: week.toString(),
     day: weekday.key,
     time: time,
   };
+  const myParams = {
+    week: week,
+    day: weekday.key,
+    time: time,
+  };
+
+  const { calendar, myCalendar } = useCalendarContext();
 
   const data = filter(calendar, params);
+  const myData = filter(myCalendar, params);
 
-  if (data.length > 0 && position === "left") {
-    return (
-      <div className="w-3 h-3 md:w-4 md:h-4 bg-emerald-500 translate-x-[-50%]" />
-    );
-  }
+  return (
+    <>
+      {data.length > 0 && position === "left" && (
+        <div className="absolute z-10 top-0 left-0 w-3 h-3 md:w-4 md:h-4 bg-emerald-500 translate-x-[-50%]" />
+      )}
+      {data.length > 0 && position === "right" && (
+        <div className="absolute z-10 top-0 left-0 w-3 h-3 md:w-4 md:h-4 bg-emerald-500 translate-x-[50%]" />
+      )}
+      {myData.length > 0 && position === "left" && (
+        <div className="absolute z-20 top-0 left-0 w-3 h-3 md:w-4 md:h-4 bg-red-500 translate-x-[-50%]" />
+      )}
 
-  if (data.length > 0 && position === "right") {
-    return (
-      <div className="w-3 h-3 md:w-4 md:h-4 bg-emerald-500 translate-x-[50%] translate-y-[-100%]" />
-    );
-  }
+      {myData.length > 0 && position === "right" && (
+        <div className="absolute z-20 top-0 left-0 w-3 h-3 md:w-4 md:h-4 bg-red-500 translate-x-[50%]" />
+      )}
+    </>
+  );
 
   return null;
 };

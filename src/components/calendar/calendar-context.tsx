@@ -23,6 +23,12 @@ export interface ICalendarContextProps {
   hours: Number[];
   calendar: any;
   setCalendar: Dispatch<SetStateAction<any>>;
+  myCalendar: any;
+  setMyCalendar: (
+    weekData: number,
+    dayData: string,
+    timeData: number[]
+  ) => void;
   updateCalendar: () => void;
 }
 
@@ -33,6 +39,8 @@ export const defaultState = {
   hours: [],
   calendar: [],
   setCalendar: () => null,
+  myCalendar: [],
+  setMyCalendar: () => null,
   updateCalendar: () => null,
 };
 
