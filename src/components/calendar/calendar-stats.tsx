@@ -25,9 +25,9 @@ export const CalendarStats = () => {
   }, [statsMinutes, statsHours, statsDays]);
 
   return (
-    <div className="py-5 px-24 text-white bg-slate-800 flex flex-col justify-center items-center h-full">
+    <div className="p-10 md:px-24 text-white bg-slate-800 flex flex-col justify-center items-center md:h-full">
       <h2 className="text-2xl mb-3">Join Us</h2>
-      <p className="mb-16 text-sm">
+      <p className="mb-8 md:mb-16 text-sm">
         Help us cover each month with 24/7 prayer.
       </p>
       <div className="flex justify-center items-center space-x-16">

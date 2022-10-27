@@ -12,7 +12,7 @@ export const Calendar = () => {
     <CalendarProvider>
       <div className="flex flex-col h-screen">
         <TimePicker />
-        <div className="flex flex-row flex-grow">
+        <div className="flex flex-row flex-grow flex-wrap">
           <CalendarView />
           <CalendarStats />
         </div>

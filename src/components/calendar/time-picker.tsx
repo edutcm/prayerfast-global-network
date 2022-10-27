@@ -185,7 +185,7 @@ export const TimePicker = () => {
 
   return (
     <div className="h-screen bg-emerald-700 p-5 flex justify-center items-center">
-      <div className="w-full max-w-4xl p-10">
+      <div className="w-full max-w-4xl p-2 md:p-10">
         <h2 className="text-white text-2xl mb-3">
           Choose a time of prayer and fasting
         </h2>
@@ -194,9 +194,9 @@ export const TimePicker = () => {
           prayer and fasting.
         </p>
 
-        <div className="space-x-3 mb-3 box-border flex flex-row">
+        <div className="md:space-x-3 mb-3 box-border flex flex-row flex-wrap">
           {/* Section 1 */}
-          <div className="flex-grow">
+          <div className="flex-grow mr-3 mb-3 md:mr-0 md:mb-0">
             <select
               className={
                 "select w-full text-white border-0 " +
@@ -223,7 +223,7 @@ export const TimePicker = () => {
             </select>
           </div>
 
-          <div className="flex-grow">
+          <div className="flex-grow mb-3 md:mb-0">
             <select
               className={
                 "select w-full text-white border-0 " +
@@ -273,8 +273,8 @@ export const TimePicker = () => {
 
         {/* Section 2 */}
         {s2Enabled && (
-          <div className="space-x-3 mb-3 box-border flex flex-row">
-            <div className="flex-grow">
+          <div className="md:space-x-3 mb-3 box-border flex flex-row flex-wrap">
+            <div className="flex-grow mb-3 md:mb-0">
               <select
                 className={
                   "select w-full text-white border-0 bg-emerald-600/50 disabled:bg-emerald-600/50 disabled:text-emerald-900"
@@ -291,7 +291,7 @@ export const TimePicker = () => {
               </select>
             </div>
 
-            <div className="flex-grow">
+            <div className="flex-grow w-full md:w-auto mb-3 md:mb-0">
               <select
                 className="select w-full bg-emerald-600/50 text-white border-0 disabled:bg-emerald-600/50 disabled:text-emerald-900"
                 onChange={(e) => setMealData(e.target.value)}
