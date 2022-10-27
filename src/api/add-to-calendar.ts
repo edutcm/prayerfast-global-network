@@ -1,6 +1,5 @@
 // imports
 import { GatsbyFunctionRequest, GatsbyFunctionResponse } from "gatsby";
-import { rest } from "lodash";
 
 // mongodb
 import { MongoClient, ServerApiVersion } from "mongodb";
@@ -9,6 +8,7 @@ interface DataProps {
   week: number;
   day: number;
   time: string;
+  meal?: string;
 }
 
 interface RequestBody {
@@ -82,6 +82,11 @@ export default async function handler(
         week: data.week,
         day: data.day,
         time: data.time,
+        meals: {
+          b: data.meal === "b" ? 1 : 0,
+          l: data.meal === "l" ? 1 : 0,
+          d: data.meal === "d" ? 1 : 0,
+        },
         count: 1,
       };
       const result = await collection.insertOne(doc);
@@ -94,9 +99,17 @@ export default async function handler(
         time: data.time,
       };
       const options = { upsert: true };
+
+      let meals: any = document.meals;
+
+      if (data.meal) {
+        meals[data.meal] = document.meals[data.meal] + 1;
+      }
+
       const updateDoc = {
         $set: {
           count: document.count + 1,
+          meals: meals,
         },
       };
       const result = await collection.updateOne(filter, updateDoc, options);

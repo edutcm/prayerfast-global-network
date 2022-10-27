@@ -1,20 +1,22 @@
 // import libs
 import React, { useState } from "react";
-import { checkIsClient } from "../../utils/client";
 import axios from "axios";
 import { useCalendarContext } from "./calendar-context";
+import { useAppContext } from "../../services/app";
+import { DateTime } from "luxon";
 
 /**
  * Time Picker Component
  * @returns React.ReactNode
  */
 export const TimePicker = () => {
-  const isClient = checkIsClient();
+  const { locale } = useAppContext();
 
   const [weekData, setWeekData] = useState<any>("");
   const [dayData, setDayData] = useState<any>("");
+  const [timeData, setTimeData] = useState<any>("");
   const [mealData, setMealData] = useState<any>("");
-  const [timeData, setTimeData] = useState<any>([]);
+  const [repeatOption, setRepeatOption] = useState<string>("m");
 
   const [weekError, setWeekError] = useState(false);
   const [dayError, setDayError] = useState(false);
@@ -28,6 +30,7 @@ export const TimePicker = () => {
 
   const handleSubmit = async () => {
     setSubmitting(true);
+    setSubmitDisabled(true);
 
     if (!weekData) {
       setWeekError(true);
@@ -37,58 +40,88 @@ export const TimePicker = () => {
       setDayError(true);
     }
 
-    if (timeData.length === 0) {
+    if (!timeData) {
       setTimeError(true);
     }
 
-    if (!weekData || !dayData || timeData.length === 0) {
+    if (!weekData || !dayData || !timeData) {
       setSubmitting(false);
+      setSubmitDisabled(false);
       return;
     }
 
     setMyCalendar(weekData, dayData, timeData);
 
-    // increment database count for week_day_time
-    await timeData.forEach(async (time: string) => {
-      const data = {
-        week: weekData,
-        day: dayData,
-        time: time,
-      };
+    let data = {
+      week: weekData,
+      day: dayData,
+      time: timeData,
+      meal: mealData,
+    };
 
+    let items = [];
+    switch (repeatOption) {
+      // monthly
+      case "m":
+        items.push({
+          week: weekData,
+          day: dayData,
+          time: timeData,
+          meal: mealData,
+        });
+        break;
+
+      // bimonthly
+      case "b":
+        const w = parseInt(weekData) + 2;
+        const week2 = w > 4 ? (w - 4).toString() : w.toString();
+        items.push({
+          week: weekData,
+          day: dayData,
+          time: timeData,
+          meal: mealData,
+        });
+        items.push({
+          week: week2,
+          day: dayData,
+          time: timeData,
+          meal: mealData,
+        });
+        break;
+
+      // weekly
+      case "w":
+        const loop: Number[] = [...Array(4).keys()];
+        loop.forEach((l, idx) => {
+          items.push({
+            week: (idx + 1).toString(),
+            day: dayData,
+            time: timeData,
+            meal: mealData,
+          });
+        });
+        break;
+    }
+
+    items.forEach(async (data) => {
       await axios
         .post("/api/add-to-calendar", {
           data: data,
         })
         .then((res) => {
-          console.log("calendar document: ", res.data.insertedId);
+          console.log(
+            "calendar document: ",
+            res.data.insertedId ? res.data.insertedId : res.data.acknowledge
+          );
+        })
+        .catch((error) => {
+          console.log(error.message);
         });
     });
 
-    // increment meal count
-    if (mealData) {
-      console.log(mealData);
-    }
-
     updateCalendar();
 
-    setSubmitDisabled(true);
     setSubmitting(false);
-  };
-
-  const handleHours = () => {
-    setTimeError(false);
-    if (isClient) {
-      const checkboxHours = document.querySelectorAll(
-        "input[name=hour]:checked"
-      );
-      let checkedTimes: any = [];
-      checkboxHours.forEach((time) => {
-        checkedTimes.push(time.getAttribute("value"));
-      });
-
-      setTimeData(checkedTimes);
-    }
   };
 
   const resetForm = () => {
@@ -96,16 +129,54 @@ export const TimePicker = () => {
     setWeekData("");
     setDayData("");
     setMealData("");
-
-    // reset dom
-    if (isClient) {
-      document
-        .querySelectorAll("input[name=hour]")
-        // @ts-expect-error
-        .forEach((el) => (el.checked = false));
-    }
+    setTimeData("");
 
     setSubmitDisabled(false);
+  };
+
+  const TimeOptions = () => {
+    let timeSlots: any = [];
+
+    hours.forEach((hour) => {
+      const leadingZero = hour < 10 ? "0" : "";
+      timeSlots.push(`${leadingZero}${hour}:00`);
+      timeSlots.push(`${leadingZero}${hour}:30`);
+    });
+
+    // datetime setup
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const cdt = DateTime.local();
+    const date = cdt.toFormat("y-MM-dd");
+    let options: any = [];
+    timeSlots.forEach((time: any) => {
+      const dt = DateTime.fromISO(`${date}T${time}:00`, { zone: "utc" });
+      const kdt = dt.setLocale(locale).setZone(timezone);
+
+      options.push({
+        key: time,
+        value: `${kdt.toLocaleString(DateTime.TIME_SIMPLE)} ${kdt.toFormat(
+          "ZZZZ"
+        )}`,
+        datetime: kdt,
+      });
+    });
+
+    options.sort((a: any, b: any) => {
+      return a.datetime.toFormat("HHmm") - b.datetime.toFormat("HHmm");
+    });
+
+    // console.log(options);
+    return (
+      <>
+        {options.map((option: any) => {
+          return (
+            <option key={option.key} value={option.key}>
+              {option.value}
+            </option>
+          );
+        })}
+      </>
+    );
   };
 
   return (
@@ -130,7 +201,7 @@ export const TimePicker = () => {
               value={weekData}
               disabled={submitDisabled}
             >
-              <option value="">Select a week of the month</option>
+              <option value="">Select a week</option>
               {weeks.map((week, idx) => {
                 return (
                   <option key={`week-${idx}`} value={week.key}>
@@ -157,7 +228,7 @@ export const TimePicker = () => {
               disabled={submitDisabled}
               value={dayData}
             >
-              <option>Select a day of the week</option>
+              <option>Select a day</option>
               {days.map((day, idx) => {
                 return (
                   <option key={`day-${idx}`} value={day.key}>
@@ -165,6 +236,47 @@ export const TimePicker = () => {
                   </option>
                 );
               })}
+            </select>
+          </div>
+
+          <div>
+            <select
+              className={
+                "select  text-white border-0 " +
+                (timeError
+                  ? "bg-red-700"
+                  : "bg-emerald-600 disabled:bg-emerald-600 disabled:text-emerald-900")
+              }
+              onChange={(e) => {
+                setTimeData(e.target.value);
+                setTimeError(false);
+              }}
+              disabled={submitDisabled}
+              value={timeData}
+            >
+              <option>Select a time</option>
+              <TimeOptions />
+            </select>
+          </div>
+
+          <div>
+            <select
+              className={
+                "select  text-white border-0 " +
+                (timeError
+                  ? "bg-red-700"
+                  : "bg-emerald-600 disabled:bg-emerald-600 disabled:text-emerald-900")
+              }
+              onChange={(e) => {
+                setRepeatOption(e.target.value);
+                setTimeError(false);
+              }}
+              disabled={submitDisabled}
+              value={repeatOption}
+            >
+              <option value="m">Every month</option>
+              <option value="b">Every other week</option>
+              <option value="w">Weekly</option>
             </select>
           </div>
 
@@ -185,60 +297,6 @@ export const TimePicker = () => {
               })}
             </select>
           </div>
-        </div>
-
-        <div className="flex flex-wrap w-full mb-3">
-          {hours.map((hour, hidx) => {
-            return (
-              <div
-                key={`hour-${hidx}`}
-                className="w-1/4 md:w-1/6 text-xs mb-3 flex flex-row"
-              >
-                <label className="w-2/5 flex items-center">
-                  <input
-                    type="checkbox"
-                    name="hour"
-                    className={
-                      "checkbox checkbox-xs checkbox-accent mr-1 " +
-                      (timeError
-                        ? "border-white bg-red-500"
-                        : "border-emerald-300")
-                    }
-                    value={`${hour}:00`}
-                    onChange={() => handleHours()}
-                    disabled={submitDisabled}
-                  />
-                  {/* @ts-expect-error */}
-                  <span
-                    className={timeError ? "text-red-200" : "text-emerald-300"}
-                  >
-                    {hour}:00
-                  </span>
-                </label>
-                <label className="w-2/5 flex items-center">
-                  <input
-                    type="checkbox"
-                    name="hour"
-                    className={
-                      "checkbox checkbox-xs checkbox-accent mr-1 " +
-                      (timeError
-                        ? "border-white bg-red-500"
-                        : "border-emerald-300")
-                    }
-                    value={`${hour}:30`}
-                    onChange={() => handleHours()}
-                    disabled={submitDisabled}
-                  />
-                  {/* @ts-expect-error */}
-                  <span
-                    className={timeError ? "text-red-200" : "text-emerald-300"}
-                  >
-                    {hour}:30
-                  </span>
-                </label>
-              </div>
-            );
-          })}
         </div>
 
         {!submitDisabled && (

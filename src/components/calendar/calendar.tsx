@@ -5,12 +5,14 @@ import React from "react";
 import { CalendarProvider } from "./calendar-provider";
 import { TimePicker } from "./time-picker";
 import { CalendarView } from "./calendar-view";
+import { CalendarStats } from "./calendar-stats";
 
 export const Calendar = () => {
   return (
     <CalendarProvider>
       <div className="flex flex-col h-screen">
         <TimePicker />
+        <CalendarStats />
         <CalendarView />
       </div>
     </CalendarProvider>

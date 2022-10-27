@@ -35,6 +35,8 @@ export const CalendarView = () => {
                 >
                   <div className="mb-2 w-full flex flex-wrap">
                     {hours.map((hour, hidx) => {
+                      const leadingZero = hour < 10 ? "0" : "";
+
                       return (
                         <div
                           key={`${weekday}-${widx}-${hidx}`}
@@ -42,13 +44,13 @@ export const CalendarView = () => {
                         >
                           <div className="relative w-3 h-3 md:w-4 md:h-4 rounded-full bg-slate-800 overflow-hidden">
                             <TimeCircle
-                              time={`${hour}:00`}
+                              time={`${leadingZero}${hour}:00`}
                               week={week.key}
                               weekday={weekday}
                               position="left"
                             />
                             <TimeCircle
-                              time={`${hour}:30`}
+                              time={`${leadingZero}${hour}:30`}
                               week={week.key}
                               weekday={weekday}
                               position="right"
@@ -81,11 +83,6 @@ const TimeCircle = ({ time, week, weekday, position }: TimeCircleProps) => {
     day: weekday.key,
     time: time,
   };
-  const myParams = {
-    week: week,
-    day: weekday.key,
-    time: time,
-  };
 
   const { calendar, myCalendar } = useCalendarContext();
 
@@ -101,11 +98,11 @@ const TimeCircle = ({ time, week, weekday, position }: TimeCircleProps) => {
         <div className="absolute z-10 top-0 left-0 w-3 h-3 md:w-4 md:h-4 bg-emerald-500 translate-x-[50%]" />
       )}
       {myData.length > 0 && position === "left" && (
-        <div className="absolute z-20 top-0 left-0 w-3 h-3 md:w-4 md:h-4 bg-red-500 translate-x-[-50%]" />
+        <div className="absolute z-20 top-0 left-0 w-3 h-3 md:w-4 md:h-4 bg-orange-400 translate-x-[-50%]" />
       )}
 
       {myData.length > 0 && position === "right" && (
-        <div className="absolute z-20 top-0 left-0 w-3 h-3 md:w-4 md:h-4 bg-red-500 translate-x-[50%]" />
+        <div className="absolute z-20 top-0 left-0 w-3 h-3 md:w-4 md:h-4 bg-orange-400 translate-x-[50%]" />
       )}
     </>
   );
