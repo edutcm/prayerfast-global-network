@@ -39,13 +39,13 @@ export interface ICalendarContextProps {
   statsMinutes: number;
   statsHours: number;
   statsDays: number;
-  statsSlots: number;
   statsPrayerTimes: number;
+  statsFasts: number;
   setStatsMinutes: Dispatch<SetStateAction<number>>;
   setStatsHours: Dispatch<SetStateAction<number>>;
   setStatsDays: Dispatch<SetStateAction<number>>;
-  setStatsSlots: Dispatch<SetStateAction<number>>;
   setStatsPrayerTimes: Dispatch<SetStateAction<number>>;
+  setStatsFasts: Dispatch<SetStateAction<number>>;
 }
 
 export const defaultState = {
@@ -64,13 +64,13 @@ export const defaultState = {
   statsMinutes: 0,
   statsHours: 0,
   statsDays: 0,
-  statsSlots: 0,
   statsPrayerTimes: 0,
+  statsFasts: 0,
   setStatsMinutes: () => null,
   setStatsHours: () => null,
   setStatsDays: () => null,
-  setStatsSlots: () => null,
   setStatsPrayerTimes: () => null,
+  setStatsFasts: () => null,
 };
 
 // app context

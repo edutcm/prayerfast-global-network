@@ -68,22 +68,24 @@ export const CalendarProvider: FC<{ children: React.ReactNode }> = ({
   const [statsMinutes, setStatsMinutes] = useState(defaultState.statsMinutes);
   const [statsHours, setStatsHours] = useState(defaultState.statsHours);
   const [statsDays, setStatsDays] = useState(defaultState.statsDays);
-  const [statsSlots, setStatsSlots] = useState(defaultState.statsSlots);
   const [statsPrayerTimes, setStatsPrayerTimes] = useState(
     defaultState.statsPrayerTimes
   );
+  const [statsFasts, setStatsFasts] = useState(defaultState.statsFasts);
 
   useEffect(() => {
     let weekData: any = groupBy(calendar, "week");
     let days: number = 0;
     let minutes: number = 0;
-    let slots: number = 0;
     let prayers: number = 0;
+    let fasts: number = 0;
 
     forEach(calendar, (item) => {
-      minutes = minutes + 30;
-      slots = slots + 1;
+      minutes = minutes + 30; // add 30 minutes for each item
       prayers = prayers + item.count;
+
+      const { b, l, d } = item.meals;
+      fasts = fasts + b + l + d;
     });
 
     forEach(weekData, (week, idx) => {
@@ -95,8 +97,8 @@ export const CalendarProvider: FC<{ children: React.ReactNode }> = ({
     setStatsDays(days);
     setStatsMinutes(minutes);
     setStatsHours(minutes / 60);
-    setStatsSlots(slots);
     setStatsPrayerTimes(prayers);
+    setStatsFasts(fasts);
   }, [calendar]);
 
   return (
@@ -120,10 +122,10 @@ export const CalendarProvider: FC<{ children: React.ReactNode }> = ({
         setStatsHours,
         statsDays,
         setStatsDays,
-        statsSlots,
-        setStatsSlots,
         statsPrayerTimes,
         setStatsPrayerTimes,
+        statsFasts,
+        setStatsFasts,
       }}
     >
       {children}

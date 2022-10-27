@@ -185,8 +185,14 @@ export const TimePicker = () => {
 
   return (
     <div className="h-screen bg-emerald-700 p-5 flex justify-center items-center">
-      <div className="w-full max-w-3xl p-10">
-        <h2 className="text-white mb-3">Choose a time of prayer and fasting</h2>
+      <div className="w-full max-w-4xl p-10">
+        <h2 className="text-white text-2xl mb-3">
+          Choose a time of prayer and fasting
+        </h2>
+        <p className="text-white text-base mb-10">
+          Take a next step with PrayerFast by committing to regular times of
+          prayer and fasting.
+        </p>
 
         <div className="space-x-3 mb-3 box-border flex flex-row">
           {/* Section 1 */}
