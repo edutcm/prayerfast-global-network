@@ -6,6 +6,7 @@ import axios from "axios";
 import find from "lodash/find";
 import groupBy from "lodash/groupBy";
 import forEach from "lodash/forEach";
+import type { ICalendarData } from "./calendar-context";
 
 // calendar provider
 export const CalendarProvider: FC<{ children: React.ReactNode }> = ({
@@ -50,29 +51,18 @@ export const CalendarProvider: FC<{ children: React.ReactNode }> = ({
     });
   };
 
-  const setMyCalendar = (
-    weekData: number,
-    dayData: string,
-    timeData: string,
-    meal?: string
-  ) => {
-    const data = {
-      week: weekData,
-      day: dayData,
-      time: timeData,
-    };
-
+  const setMyCalendar = (data: ICalendarData[]) => {
     // clone myCalendar data
     const myCalendarData = JSON.parse(JSON.stringify(myCalendar));
+    data.forEach((item) => {
+      const match = find(myCalendarData, item);
+      if (!match) {
+        myCalendarData.push(item);
+      }
+    });
 
     // add items to myCalendar
-    const match = find(myCalendarData, data);
-    if (!match) {
-      myCalendarData.push(data);
-    }
-
     setMyCalendarFn(myCalendarData);
-    updateCalendar();
   };
 
   const [statsMinutes, setStatsMinutes] = useState(defaultState.statsMinutes);

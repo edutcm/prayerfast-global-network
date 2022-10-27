@@ -16,6 +16,13 @@ export interface IMealsProps {
   value: string;
 }
 
+export interface ICalendarData {
+  week: string;
+  day: string;
+  time: string;
+  meal?: string;
+}
+
 export interface ICalendarContextProps {
   // api data
   weeks: IWeeksProps[];
@@ -26,12 +33,7 @@ export interface ICalendarContextProps {
   setCalendar: Dispatch<SetStateAction<any>>;
   myCalendar: any;
   // my calendar
-  setMyCalendar: (
-    weekData: number,
-    dayData: string,
-    timeData: string,
-    meal?: string
-  ) => void;
+  setMyCalendar: (data: ICalendarData[]) => void;
   updateCalendar: () => void;
   // stats
   statsMinutes: number;
