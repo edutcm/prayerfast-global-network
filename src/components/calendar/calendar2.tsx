@@ -8,7 +8,9 @@ import axios from "axios";
 
 // import components
 import { CalendarStats } from "./calendar-stats";
-import { UserIcon, UserGroupIcon } from "@heroicons/react/outline";
+import { CalendarIcon, ClockIcon } from "@heroicons/react/outline";
+import { FaPrayingHands } from "react-icons/fa";
+
 /**
  * Main Calendar Page View
  * @returns React.ReactNode
@@ -17,14 +19,17 @@ export const Calendar2 = () => {
   return (
     <CalendarProvider>
       <div className="flex flex-col text-white h-screen">
-        <div className="p-5 md:px-10 md:py-16 bg-emerald-600 h-1/5">
-          <h2 className="text-2xl mb-3">Choose a time of prayer and fasting</h2>
+        <div className="p-5 md:px-10 md:py-16 bg-emerald-600 h-1/5 text-center">
+          <h2 className="text-3xl mb-3">Choose a time of prayer and fasting</h2>
           <p className="text-base">
             Take a next step with PrayerFast by committing to regular times of
             prayer and fasting.
           </p>
         </div>
         <div className="flex flex-row flex-grow h-4/5">
+          <div className="md:h-full border-r border-slate-900 overflow-y-scroll no-scrollbar flex-grow">
+            <CalendarStats />
+          </div>
           <div className="md:h-full border-r border-slate-900 overflow-y-scroll w-full md:max-w-xs no-scrollbar flex-grow">
             <WeekPicker />
             <DayPicker />
@@ -35,9 +40,6 @@ export const Calendar2 = () => {
           <div className="md:h-full border-r border-slate-900 overflow-y-scroll w-full md:max-w-xs no-scrollbar flex-grow">
             <FastPicker />
             <AddToCalendar />
-          </div>
-          <div className="md:h-full border-r border-slate-900 overflow-y-scroll no-scrollbar flex-grow">
-            <CalendarStats />
           </div>
         </div>
       </div>
@@ -52,7 +54,7 @@ const WeekPicker = () => {
   const { weeks } = useCalendarContext();
 
   return (
-    <div className="p-5 md:p-10">
+    <div className="p-5 md:p-10 md:pb-0">
       <h2 className="text-lg mb-5 flex flex-row items-center">
         <Step step={1} active={true} />
         <span>Pick a week</span>
@@ -72,12 +74,16 @@ type WeekBoxProps = {
 };
 
 const WeekBox = ({ week }: WeekBoxProps) => {
-  const { weekData, setWeekData } = useCalendarContext();
+  const { weekData, setWeekData, calendar } = useCalendarContext();
+
+  const calWeek = groupBy(calendar, "week");
+  const calDays = groupBy(calWeek[week.key], "day");
+  const totalDays = Object.keys(calDays).length;
 
   return (
     <li>
       <button
-        className={"border-0 outline-0 flex flex-row group min-w-[70%]"}
+        className={"border-0 outline-0 flex flex-row group w-full"}
         onClick={() => setWeekData(week.key)}
       >
         <span
@@ -92,13 +98,14 @@ const WeekBox = ({ week }: WeekBoxProps) => {
         </span>
         <span
           className={
-            "px-3 py-1 rounded-tr-md rounded-br-md " +
+            "px-3 py-1 rounded-tr-md rounded-br-md flex flex-row space-x-2 items-center " +
             (week.key === weekData
               ? "bg-emerald-500 group-hover:bg-emerald-400"
               : "bg-slate-600 group-hover:bg-emerald-500")
           }
         >
-          0
+          <span>{totalDays}</span>
+          <CalendarIcon className="h-[18px] w-[18px]" />
         </span>
       </button>
     </li>
@@ -109,7 +116,10 @@ const WeekBox = ({ week }: WeekBoxProps) => {
  * Day Picker
  */
 const DayPicker = () => {
-  const { days, dayData, weekData, setDayData } = useCalendarContext();
+  const { days, dayData, weekData, setDayData, calendar } =
+    useCalendarContext();
+
+  const calWeek = groupBy(calendar, "week");
 
   return (
     <div className="p-5 md:p-10">
@@ -119,11 +129,18 @@ const DayPicker = () => {
       </h2>
       <ul className="space-y-2">
         {days.map((day) => {
+          const calDays = groupBy(calWeek[weekData], "day");
+          let timesCount: number = 0;
+
+          if (calDays[day.key]) {
+            timesCount = calDays[day.key].length;
+          }
+
           return (
             <li key={day.key}>
               <button
                 className={
-                  "disabled:text-slate-500 disabled:bg-slate-700 disabled:cursor-not-allowed flex flex-row min-w-[70%] rounded-md"
+                  "disabled:text-slate-500 disabled:bg-slate-700 disabled:cursor-not-allowed flex flex-row w-full rounded-md group"
                 }
                 onClick={() => setDayData(day.key)}
                 disabled={weekData ? false : true}
@@ -140,13 +157,14 @@ const DayPicker = () => {
                 </span>
                 <span
                   className={
-                    "px-3 py-1 rounded-tr-md rounded-br-md " +
+                    "px-3 py-1 rounded-tr-md rounded-br-md flex flex-row space-x-2 items-center " +
                     (day.key === dayData
                       ? "bg-emerald-500 group-hover:bg-emerald-400"
                       : "bg-slate-600 group-hover:bg-emerald-500")
                   }
                 >
-                  0
+                  <span>{timesCount}</span>
+                  <ClockIcon className="h-[18px] w-[18px]" />
                 </span>
               </button>
             </li>
@@ -281,25 +299,22 @@ const TimePicker = () => {
                   className={
                     "px-3 py-1 flex flex-row justify-end items-center rounded-tr-md rounded-br-md min-w-[5rem] " +
                     (time.key === timeData
-                      ? "bg-emerald-700 "
-                      : "bg-slate-900/70 ") +
+                      ? "bg-emerald-500 "
+                      : "bg-slate-600 ") +
                     (timeCount > 0 || time.key === timeData
                       ? "text-white "
-                      : "text-slate-700 ") +
+                      : "text-slate-500 ") +
                     (dayData
                       ? time.key === timeData
-                        ? "group-hover:bg-emerald-800 group-hover:text-white"
-                        : "group-hover:bg-emerald-700 group-hover:text-white"
+                        ? "group-hover:bg-emerald-400 group-hover:text-white"
+                        : "group-hover:bg-emerald-500 group-hover:text-white"
                       : "")
                   }
                 >
                   <span className="mr-2">
                     {time.value === timeData ? timeCount + 1 : timeCount}
                   </span>
-                  {timeCount <= 1 && <UserIcon className="h-[18px] w-[18px]" />}
-                  {timeObject && timeObject.count > 1 && (
-                    <UserGroupIcon className="h-[18px] w-[18px]" />
-                  )}
+                  <FaPrayingHands className="h-[18px] w-[18px]" />
                 </span>
               </button>
             </li>
@@ -318,20 +333,17 @@ const FastPicker = () => {
     useCalendarContext();
 
   return (
-    <div className="p-5 md:p-10 flex-grow">
-      <h2 className="text-lg mb-3 flex flex-row items-center">
+    <div className="p-5 md:p-10 md:pb-0 flex-grow">
+      <h2 className="text-lg mb-5 flex flex-row items-center">
         <Step
           step={4}
           active={weekData && dayData && timeData ? true : false}
         />
         Pick a meal
       </h2>
-      <p className="text-sm italic mb-3">
-        Would you like to choose a meal to fast from for the day?
-      </p>
       <select
         className={
-          "select w-full text-white border-0 disabled:bg-slate-600/50 disabled:text-slate-400 " +
+          "select mb-3 w-full text-white border-0 disabled:bg-slate-600/50 disabled:text-slate-400 " +
           (mealData !== "" ? "bg-emerald-600" : "bg-slate-700")
         }
         onChange={(e) => setMealData(e.target.value)}
@@ -347,6 +359,9 @@ const FastPicker = () => {
           );
         })}
       </select>
+      <p className="text-sm italic text-slate-500">
+        Would you like to choose a meal to fast from for the day?
+      </p>
     </div>
   );
 };
@@ -412,18 +427,13 @@ const AddToCalendar = () => {
 
   return (
     <div className="p-5 md:p-10 flex-grow">
-      <h2 className="text-lg mb-3 flex flex-row items-center">
+      <h2 className="text-lg mb-5 flex flex-row items-center">
         <Step
           step={5}
           active={weekData && dayData && timeData ? true : false}
         />
         Last Step
       </h2>
-      <p className="text-sm italic mb-3">
-        Are you ready to join others in praying and fasting the PrayerFast
-        prayer?
-      </p>
-
       <button
         className="px-3 py-2 bg-emerald-500/80 hover:bg-emerald-500 rounded-md border-0 disabled:bg-slate-700 disabled:text-slate-500 disabled:cursor-not-allowed"
         onClick={async () => handleSubmit()}
@@ -446,7 +456,7 @@ const Step = ({ step, active }: StepProps) => (
   <span
     className={
       "w-8 h-8 mr-3 rounded-full flex justify-center items-center " +
-      (active ? "bg-emerald-600 text-white" : "bg-slate-600 text-slate-400")
+      (active ? "bg-sky-600 text-white" : "bg-slate-600 text-slate-400")
     }
   >
     {step}

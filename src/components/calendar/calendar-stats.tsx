@@ -9,12 +9,12 @@ export const CalendarStats = () => {
   const monthMinutes = 60 * 24 * 7 * 4;
   const monthHours = 24 * 7 * 4;
   const monthDays = 7 * 4;
-  const monthMeals = 3 * 28;
+  const monthFasts = 3 * 28;
 
   const [minP, setMinP] = useState((statsMinutes / monthMinutes) * 100);
   const [hourP, setHourP] = useState((statsHours / monthHours) * 100);
   const [dayP, setDayP] = useState((statsDays / monthDays) * 100);
-  const [mealP, setMealP] = useState();
+  const [fastP, setFastP] = useState();
 
   useEffect(() => {
     const minPVal = (statsMinutes / monthMinutes) * 100;
@@ -26,13 +26,42 @@ export const CalendarStats = () => {
     setDayP(dayPVal);
   }, [statsMinutes, statsHours, statsDays]);
 
+  type StatsBoxProps = {
+    count: number;
+    label: string;
+    bg: string;
+  };
+
+  const StatsBox = ({ count, label, bg }: StatsBoxProps) => {
+    return (
+      <div className={`${bg} p-5 rounded-md text-center`}>
+        <div className="text-3xl">{count}</div>
+        <div>{label}</div>
+      </div>
+    );
+  };
+
   return (
     <div className="p-5 md:p-10 text-white bg-slate-800 flex flex-col justify-start items-center flex-grow box-border">
       <h2 className="text-2xl mb-3">Join Us</h2>
-      <p className="mb-8 md:mb-16 text-sm">
-        Help us cover each month with 24/7 prayer.
+
+      <p className="mb-5 md:mb-10 text-sm text-center">
+        Are you ready to join others in praying and fasting the PrayerFast
+        prayer?
       </p>
-      <div className="flex justify-center items-center space-x-16">
+
+      <div className="grid grid-cols-2 w-full gap-3">
+        <StatsBox count={statsDays} label="Days" bg="bg-emerald-700" />
+        <StatsBox count={statsHours} label="Hours" bg="bg-emerald-500" />
+        <StatsBox
+          count={statsPrayerTimes}
+          label="Prayer Times"
+          bg="bg-emerald-500"
+        />
+        <StatsBox count={statsFasts} label="Fast Times" bg="bg-emerald-700" />
+      </div>
+
+      {/* <div className="flex justify-center items-center space-x-16">
         <div className="space-y-1 text-xs">
           <div className="text-fuchsia-400">{statsDays} Days</div>
           <div className="text-sky-400">{statsHours} Hours</div>
@@ -76,7 +105,7 @@ export const CalendarStats = () => {
             />
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
