@@ -1,5 +1,5 @@
 // import libs
-import React from "react";
+import React, { useEffect, useState } from "react";
 import filter from "lodash/filter";
 import { useCalendarContext } from "./calendar-context";
 import { DateTime } from "luxon";
@@ -77,22 +77,21 @@ export const CalendarView = () => {
                           key={`${weekday}-${widx}-${hidx}`}
                           className="flex-grow-0 w-1/4 md:w-1/6 flex justify-center items-center box-border"
                         >
-                          <div
-                            className="w-full h-4 m-[1px] tooltip before:z-[500] before:content-[attr(data-tip)] cursor-pointer"
-                            data-tip={hour.tooltip}
-                          >
-                            <div className="relative w-full h-full rounded-sm bg-slate-800 overflow-hidden">
+                          <div className="w-full h-4 m-[1px]">
+                            <div className="flex flex-row w-full h-full rounded-sm bg-slate-800">
                               <TimeCircle
                                 time={hour.utc00}
                                 week={week.key}
                                 weekday={weekday}
                                 position="left"
+                                tooltip={hour.tooltip}
                               />
                               <TimeCircle
                                 time={hour.utc30}
                                 week={week.key}
                                 weekday={weekday}
                                 position="right"
+                                tooltip={hour.tooltip.replace(":00", ":30")}
                               />
                             </div>
                           </div>
@@ -115,37 +114,75 @@ interface TimeCircleProps {
   week: any;
   weekday: any;
   position: string;
+  tooltip: string;
 }
 
-const TimeCircle = ({ time, week, weekday, position }: TimeCircleProps) => {
+const TimeCircle = ({
+  time,
+  week,
+  weekday,
+  position,
+  tooltip,
+}: TimeCircleProps) => {
   const params = {
     week: week.toString(),
     day: weekday.key,
     time: time,
   };
 
-  const { calendar, myCalendar } = useCalendarContext();
+  const { calendar } = useCalendarContext();
+  const { dayData, timeData, weekData } = useCalendarContext();
+  const { setDayData, setTimeData, setWeekData } = useCalendarContext();
 
   const data = filter(calendar, params);
-  const myData = filter(myCalendar, params);
+
+  const [className, setClassName] = useState("");
+
+  const handleClick = () => {
+    setDayData(weekday.key);
+    setWeekData(week);
+    setTimeData(time);
+  };
+
+  useEffect(() => {
+    let className: string = "";
+
+    // local selection
+    if (
+      params.day === dayData &&
+      params.time === timeData &&
+      params.week === weekData.toString()
+    ) {
+      className = "bg-fuchsia-500 ";
+    }
+    // global data
+    else {
+      if (data.length > 0 && position === "left") {
+        className = "bg-emerald-400 ";
+      }
+      if (data.length > 0 && position === "right") {
+        className = "bg-emerald-600 ";
+      }
+      className = className + " hover:bg-emerald-300";
+    }
+
+    // positioning
+    if (position === "left") {
+      className = className + "rounded-tl-sm rounded-bl-sm";
+    } else {
+      className = className + "rounded-tr-sm rounded-br-sm";
+    }
+
+    className = className + " hover:bg-fuchsia-400";
+
+    setClassName(className);
+  }, [dayData, data, timeData, weekData, params]);
 
   return (
-    <>
-      {data.length > 0 && position === "left" && (
-        <div className="absolute z-10 top-0 left-0 w-3 h-3 md:w-4 md:h-4 bg-emerald-400 translate-x-[-50%]" />
-      )}
-      {data.length > 0 && position === "right" && (
-        <div className="absolute z-10 top-0 left-0 w-3 h-3 md:w-4 md:h-4 bg-emerald-500 translate-x-[50%]" />
-      )}
-      {myData.length > 0 && position === "left" && (
-        <div className="absolute z-20 top-0 left-0 w-3 h-3 md:w-4 md:h-4 bg-fuchsia-400 translate-x-[-50%]" />
-      )}
-
-      {myData.length > 0 && position === "right" && (
-        <div className="absolute z-20 top-0 left-0 w-3 h-3 md:w-4 md:h-4 bg-fuchsia-500  translate-x-[50%]" />
-      )}
-    </>
+    <div
+      className={`w-[50%] h-full flex-grow-0 tooltip before:z-[500] before:content-[attr(data-tip)] cursor-pointer ${className}`}
+      data-tip={tooltip}
+      onClick={handleClick}
+    />
   );
-
-  return null;
 };

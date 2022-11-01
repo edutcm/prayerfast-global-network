@@ -34,7 +34,7 @@ export interface ICalendarContextProps {
   myCalendar: any;
   // my calendar
   setMyCalendar: (data: ICalendarData[]) => void;
-  updateCalendar: () => void;
+  updateCalendar: (cb: CallableFunction) => void;
   // stats
   statsMinutes: number;
   statsHours: number;
@@ -46,6 +46,17 @@ export interface ICalendarContextProps {
   setStatsDays: Dispatch<SetStateAction<number>>;
   setStatsPrayerTimes: Dispatch<SetStateAction<number>>;
   setStatsFasts: Dispatch<SetStateAction<number>>;
+  // timepicker
+  weekData: string;
+  setWeekData: Dispatch<SetStateAction<string>>;
+  dayData: string;
+  setDayData: Dispatch<SetStateAction<string>>;
+  timeData: string;
+  setTimeData: Dispatch<SetStateAction<string>>;
+  mealData: string;
+  setMealData: Dispatch<SetStateAction<string>>;
+  repeatOption: string;
+  setRepeatOption: Dispatch<SetStateAction<string>>;
 }
 
 export const defaultState = {
@@ -71,6 +82,17 @@ export const defaultState = {
   setStatsDays: () => null,
   setStatsPrayerTimes: () => null,
   setStatsFasts: () => null,
+  // timepicker
+  weekData: "",
+  setWeekData: () => null,
+  dayData: "",
+  setDayData: () => null,
+  timeData: "",
+  setTimeData: () => null,
+  mealData: "",
+  setMealData: () => null,
+  repeatOption: "m",
+  setRepeatOption: () => null,
 };
 
 // app context

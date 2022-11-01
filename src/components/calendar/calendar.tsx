@@ -10,11 +10,11 @@ import { CalendarStats } from "./calendar-stats";
 export const Calendar = () => {
   return (
     <CalendarProvider>
-      <div className="flex flex-col h-screen">
+      <div className="flex flex-row h-screen flex-wrap">
         <TimePicker />
+        <CalendarStats />
         <div className="flex flex-row flex-grow flex-wrap">
           <CalendarView />
-          <CalendarStats />
         </div>
       </div>
     </CalendarProvider>

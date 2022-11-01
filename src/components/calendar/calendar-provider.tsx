@@ -20,13 +20,13 @@ export const CalendarProvider: FC<{ children: React.ReactNode }> = ({
   ];
 
   const days: IDaysProps[] = [
-    { key: "u", value: "Sunday" },
-    { key: "m", value: "Monday" },
-    { key: "t", value: "Tuesday" },
-    { key: "w", value: "Wednesday" },
-    { key: "r", value: "Thursday" },
-    { key: "f", value: "Friday" },
-    { key: "s", value: "Saturday" },
+    { key: "u", value: "Sundays" },
+    { key: "m", value: "Mondays" },
+    { key: "t", value: "Tuesdays" },
+    { key: "w", value: "Wednesdays" },
+    { key: "r", value: "Thursdays" },
+    { key: "f", value: "Fridays" },
+    { key: "s", value: "Saturdays" },
   ];
 
   const meals: IMealsProps[] = [
@@ -41,13 +41,24 @@ export const CalendarProvider: FC<{ children: React.ReactNode }> = ({
 
   const [myCalendar, setMyCalendarFn] = useState<any>(defaultState.myCalendar);
 
+  // timepicker
+  const [weekData, setWeekData] = useState<string>(defaultState.weekData);
+  const [dayData, setDayData] = useState<string>(defaultState.dayData);
+  const [timeData, setTimeData] = useState<string>(defaultState.timeData);
+  const [mealData, setMealData] = useState<string>(defaultState.mealData);
+  const [repeatOption, setRepeatOption] = useState<string>(
+    defaultState.repeatOption
+  );
+
   useEffect(() => {
-    updateCalendar();
+    updateCalendar(() => {});
   }, []);
 
-  const updateCalendar = () => {
+  const updateCalendar = (cb: CallableFunction) => {
     axios.get("/api/calendar").then((res) => {
       setCalendar(res.data);
+
+      return cb();
     });
   };
 
@@ -126,6 +137,17 @@ export const CalendarProvider: FC<{ children: React.ReactNode }> = ({
         setStatsPrayerTimes,
         statsFasts,
         setStatsFasts,
+        // timepicker
+        weekData,
+        setWeekData,
+        dayData,
+        setDayData,
+        timeData,
+        setTimeData,
+        mealData,
+        setMealData,
+        repeatOption,
+        setRepeatOption,
       }}
     >
       {children}

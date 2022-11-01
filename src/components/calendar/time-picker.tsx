@@ -12,11 +12,11 @@ import { DateTime } from "luxon";
 export const TimePicker = () => {
   const { locale } = useAppContext();
 
-  const [weekData, setWeekData] = useState<string>("");
-  const [dayData, setDayData] = useState<string>("");
-  const [timeData, setTimeData] = useState<string>("");
-  const [mealData, setMealData] = useState<string>("");
-  const [repeatOption, setRepeatOption] = useState<string>("m");
+  const { weekData, setWeekData } = useCalendarContext();
+  const { dayData, setDayData } = useCalendarContext();
+  const { timeData, setTimeData } = useCalendarContext();
+  const { mealData, setMealData } = useCalendarContext();
+  const { repeatOption, setRepeatOption } = useCalendarContext();
 
   const [weekError, setWeekError] = useState(false);
   const [dayError, setDayError] = useState(false);
@@ -184,7 +184,7 @@ export const TimePicker = () => {
   };
 
   return (
-    <div className="h-screen bg-emerald-700 p-5 flex justify-center items-center">
+    <div className="bg-emerald-700 p-5 flex justify-center items-center w-[70%] flex-grow-0 box-border">
       <div className="w-full max-w-4xl p-2 md:p-10">
         <h2 className="text-white text-2xl mb-3">
           Choose a time of prayer and fasting

@@ -9,10 +9,12 @@ export const CalendarStats = () => {
   const monthMinutes = 60 * 24 * 7 * 4;
   const monthHours = 24 * 7 * 4;
   const monthDays = 7 * 4;
+  const monthMeals = 3 * 28;
 
   const [minP, setMinP] = useState((statsMinutes / monthMinutes) * 100);
   const [hourP, setHourP] = useState((statsHours / monthHours) * 100);
   const [dayP, setDayP] = useState((statsDays / monthDays) * 100);
+  const [mealP, setMealP] = useState();
 
   useEffect(() => {
     const minPVal = (statsMinutes / monthMinutes) * 100;
@@ -25,18 +27,18 @@ export const CalendarStats = () => {
   }, [statsMinutes, statsHours, statsDays]);
 
   return (
-    <div className="p-10 md:px-24 text-white bg-slate-800 flex flex-col justify-center items-center md:h-full">
+    <div className="p-5 md:p-10 text-white bg-slate-800 flex flex-col justify-start items-center flex-grow box-border">
       <h2 className="text-2xl mb-3">Join Us</h2>
       <p className="mb-8 md:mb-16 text-sm">
         Help us cover each month with 24/7 prayer.
       </p>
       <div className="flex justify-center items-center space-x-16">
-        <div className="space-y-1 text-md">
+        <div className="space-y-1 text-xs">
           <div className="text-fuchsia-400">{statsDays} Days</div>
           <div className="text-sky-400">{statsHours} Hours</div>
           <div className="text-emerald-400">{statsMinutes} Minutes</div>
           <div className="text-slate-400">{statsPrayerTimes} Prayer Times</div>
-          <div className="text-slate-400">{statsFasts} Fasts</div>
+          <div className="text-slate-400">{statsFasts} Meals Fasted</div>
         </div>
 
         <div className="min-w-[10rem] relative">
