@@ -19,28 +19,34 @@ export const Calendar2 = () => {
   return (
     <CalendarProvider>
       <div className="flex flex-col text-white h-screen">
-        <div className="p-5 md:px-10 md:py-16 bg-emerald-600 h-1/5 text-center">
-          <h2 className="text-3xl mb-3">Choose a time of prayer and fasting</h2>
-          <p className="text-base">
-            Take a next step with PrayerFast by committing to regular times of
-            prayer and fasting.
-          </p>
-        </div>
-        <div className="flex flex-row flex-grow h-4/5">
-          <div className="md:h-full border-r border-slate-900 overflow-y-scroll no-scrollbar flex-grow">
-            <CalendarStats />
+        <CalendarStats />
+        {/* <div className="px-10 py-16 md:px-10 md:py-16 bg-emerald-600 text-center grid grid-cols-2">
+          <div>
+            <h2 className="text-3xl mb-3">
+              Choose a time of prayer and fasting
+            </h2>
+            <p className="text-base">
+              Take a next step with PrayerFast by committing to regular times of
+              prayer and fasting.
+            </p>
           </div>
-          <div className="md:h-full border-r border-slate-900 overflow-y-scroll w-full md:max-w-xs no-scrollbar flex-grow">
+
+        </div> */}
+        <div className="flex flex-col md:flex-row flex-grow md:h-4/5">
+          <div className="md:h-full border-r border-gray-900 overflow-y-scroll w-full md:max-w-xs no-scrollbar flex-grow">
             <WeekPicker />
             <DayPicker />
           </div>
-          <div className="md:h-full border-r border-slate-900 overflow-y-scroll w-full md:max-w-lg no-scrollbar flex-grow">
+          <div className="md:h-full border-r border-gray-900 overflow-y-scroll no-scrollbar flex-grow">
             <TimePicker />
           </div>
-          <div className="md:h-full border-r border-slate-900 overflow-y-scroll w-full md:max-w-xs no-scrollbar flex-grow">
+          <div className="md:h-full border-r border-gray-900 overflow-y-scroll w-full md:max-w-xs no-scrollbar flex-grow">
             <FastPicker />
             <AddToCalendar />
           </div>
+          {/* <div className="md:h-full border-r border-gray-900 overflow-y-scroll no-scrollbar flex-grow">
+            <CalendarStats />
+          </div> */}
         </div>
       </div>
     </CalendarProvider>
@@ -90,8 +96,8 @@ const WeekBox = ({ week }: WeekBoxProps) => {
           className={
             "px-3 py-1 flex-grow rounded-tl-md rounded-bl-md text-left " +
             (week.key === weekData
-              ? "bg-emerald-600 group-hover:bg-emerald-500"
-              : "bg-slate-700 group-hover:bg-emerald-600")
+              ? "bg-fuchsia-600 group-hover:bg-fuchsia-500"
+              : "bg-gray-700 group-hover:bg-fuchsia-600")
           }
         >
           {week.value}
@@ -100,8 +106,8 @@ const WeekBox = ({ week }: WeekBoxProps) => {
           className={
             "px-3 py-1 rounded-tr-md rounded-br-md flex flex-row space-x-2 items-center " +
             (week.key === weekData
-              ? "bg-emerald-500 group-hover:bg-emerald-400"
-              : "bg-slate-600 group-hover:bg-emerald-500")
+              ? "bg-fuchsia-500 group-hover:bg-fuchsia-400"
+              : "bg-gray-600 group-hover:bg-fuchsia-500")
           }
         >
           <span>{totalDays}</span>
@@ -140,7 +146,7 @@ const DayPicker = () => {
             <li key={day.key}>
               <button
                 className={
-                  "disabled:text-slate-500 disabled:bg-slate-700 disabled:cursor-not-allowed flex flex-row w-full rounded-md group"
+                  "disabled:text-gray-500 disabled:bg-gray-700 disabled:cursor-not-allowed flex flex-row w-full rounded-md group"
                 }
                 onClick={() => setDayData(day.key)}
                 disabled={weekData ? false : true}
@@ -149,8 +155,8 @@ const DayPicker = () => {
                   className={
                     "px-3 py-1 flex-grow rounded-tl-md rounded-bl-md text-left " +
                     (day.key === dayData
-                      ? "bg-emerald-600 group-hover:bg-emerald-500"
-                      : "bg-slate-700 group-hover:bg-emerald-600")
+                      ? "bg-fuchsia-600 group-hover:bg-fuchsia-500"
+                      : "bg-gray-700 group-hover:bg-fuchsia-600")
                   }
                 >
                   {day.value}
@@ -159,8 +165,8 @@ const DayPicker = () => {
                   className={
                     "px-3 py-1 rounded-tr-md rounded-br-md flex flex-row space-x-2 items-center " +
                     (day.key === dayData
-                      ? "bg-emerald-500 group-hover:bg-emerald-400"
-                      : "bg-slate-600 group-hover:bg-emerald-500")
+                      ? "bg-fuchsia-500 group-hover:bg-fuchsia-400"
+                      : "bg-gray-600 group-hover:bg-fuchsia-500")
                   }
                 >
                   <span>{timesCount}</span>
@@ -207,7 +213,7 @@ const TimePicker = () => {
 
       setTimes(filteredTimes);
     }
-  }, [calendar, weekData, dayData]);
+  }, [calendar, weekData, dayData, timeData]);
 
   let timeSlots: any = [];
 
@@ -251,12 +257,12 @@ const TimePicker = () => {
           <span>Pick a Prayer Time</span>
         </span>
         {weekData && dayData && (
-          <span className="text-sm italic text-slate-500">
+          <span className="text-sm italic text-gray-500">
             ({weekLabel[0].value}-{dayLabel[0].value})
           </span>
         )}
       </h2>
-      <ul className="grid grid-cols-2 gap-2">
+      <ul className="grid grid-cols-4 gap-2">
         {options.map((time: any) => {
           let timeExists: any = [];
           let timeObject: any;
@@ -279,17 +285,17 @@ const TimePicker = () => {
                 <span
                   className={
                     "px-3 py-1 flex-grow text-left rounded-tl-md rounded-bl-md " +
-                    " disabled:text-slate-500 " +
+                    " disabled:text-gray-500 " +
                     (time.key === timeData
-                      ? "bg-emerald-600 "
-                      : "bg-slate-700 ") +
+                      ? "bg-fuchsia-600 "
+                      : "bg-gray-700 ") +
                     (timeCount > 0 || time.key === timeData
                       ? "text-white "
-                      : "text-slate-400 ") +
+                      : "text-gray-400 ") +
                     (dayData
                       ? time.key === timeData
-                        ? "group-hover:bg-emerald-600 group-hover:text-white"
-                        : "group-hover:bg-emerald-600 group-hover:text-white"
+                        ? "group-hover:bg-fuchsia-600 group-hover:text-white"
+                        : "group-hover:bg-fuchsia-600 group-hover:text-white"
                       : "")
                   }
                 >
@@ -299,15 +305,15 @@ const TimePicker = () => {
                   className={
                     "px-3 py-1 flex flex-row justify-end items-center rounded-tr-md rounded-br-md min-w-[5rem] " +
                     (time.key === timeData
-                      ? "bg-emerald-500 "
-                      : "bg-slate-600 ") +
+                      ? "bg-fuchsia-500 "
+                      : "bg-gray-600 ") +
                     (timeCount > 0 || time.key === timeData
                       ? "text-white "
-                      : "text-slate-500 ") +
+                      : "text-gray-500 ") +
                     (dayData
                       ? time.key === timeData
-                        ? "group-hover:bg-emerald-400 group-hover:text-white"
-                        : "group-hover:bg-emerald-500 group-hover:text-white"
+                        ? "group-hover:bg-fuchsia-400 group-hover:text-white"
+                        : "group-hover:bg-fuchsia-500 group-hover:text-white"
                       : "")
                   }
                 >
@@ -343,8 +349,8 @@ const FastPicker = () => {
       </h2>
       <select
         className={
-          "select mb-3 w-full text-white border-0 disabled:bg-slate-600/50 disabled:text-slate-400 " +
-          (mealData !== "" ? "bg-emerald-600" : "bg-slate-700")
+          "select mb-3 w-full text-white border-0 disabled:bg-gray-600/50 disabled:text-gray-400 " +
+          (mealData !== "" ? "bg-fuchsia-600" : "bg-gray-700")
         }
         onChange={(e) => setMealData(e.target.value)}
         disabled={timeData ? false : true}
@@ -359,7 +365,7 @@ const FastPicker = () => {
           );
         })}
       </select>
-      <p className="text-sm italic text-slate-500">
+      <p className="text-sm italic text-gray-500">
         Would you like to choose a meal to fast from for the day?
       </p>
     </div>
@@ -370,7 +376,8 @@ const FastPicker = () => {
  * Submit
  */
 const AddToCalendar = () => {
-  const { weekData, dayData, timeData, mealData } = useCalendarContext();
+  const { weekData, dayData, timeData, mealData, setTimeData } =
+    useCalendarContext();
   const { updateCalendar } = useCalendarContext();
   const { setMealData } = useCalendarContext();
 
@@ -415,6 +422,7 @@ const AddToCalendar = () => {
           res.data.insertedId ? res.data.insertedId : res.data.acknowledge
         );
         updateCalendar(() => {
+          setTimeData("");
           setSubmitting(false);
           setSubmitLabel("Add another time");
           setMealData("");
@@ -435,7 +443,7 @@ const AddToCalendar = () => {
         Last Step
       </h2>
       <button
-        className="px-3 py-2 bg-emerald-500/80 hover:bg-emerald-500 rounded-md border-0 disabled:bg-slate-700 disabled:text-slate-500 disabled:cursor-not-allowed"
+        className="px-3 py-2 bg-emerald-500/80 hover:bg-emerald-500 rounded-md border-0 disabled:bg-gray-700 disabled:text-gray-500 disabled:cursor-not-allowed"
         onClick={async () => handleSubmit()}
         disabled={submitDisabled}
       >
@@ -456,7 +464,7 @@ const Step = ({ step, active }: StepProps) => (
   <span
     className={
       "w-8 h-8 mr-3 rounded-full flex justify-center items-center " +
-      (active ? "bg-sky-600 text-white" : "bg-slate-600 text-slate-400")
+      (active ? "bg-emerald-600 text-white" : "bg-gray-600 text-gray-400")
     }
   >
     {step}

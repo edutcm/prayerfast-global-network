@@ -15,6 +15,9 @@ module.exports = {
       gridTemplateColumns: {
         "commit-button": "50px 1fr",
       },
+      screens: {
+        standalone: { raw: "(display-mode: standalone)" },
+      },
     },
   },
   plugins: [require("daisyui")],
