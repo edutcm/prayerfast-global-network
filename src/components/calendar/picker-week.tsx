@@ -7,17 +7,18 @@ import groupBy from "lodash/groupBy";
 import { Step } from "./step";
 import { CalendarIcon } from "@heroicons/react/outline";
 
-/**
- * Week Picker
- */
-export const WeekPicker = () => {
+export interface WeekPickerProps {
+  lang: any;
+}
+
+export const WeekPicker = ({ lang }: WeekPickerProps) => {
   const { weeks } = useCalendarContext();
 
   return (
     <div className="px-5 pt-10 md:pl-10 md:pr-0 lg:p-10 lg:pb-0">
       <h2 className="text-lg mb-5 flex flex-row items-center">
         <Step step={1} active={true} />
-        <span>Pick a week</span>
+        <span>{lang.label}</span>
       </h2>
       {/* <p className="text-base mb-5">You can pick multiple weeks.</p> */}
       <ul className="space-y-2">

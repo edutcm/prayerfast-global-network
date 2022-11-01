@@ -10,7 +10,11 @@ import axios, { AxiosPromise } from "axios";
 // import components
 import { Step } from "./step";
 
-export const AddToCalendar = () => {
+export interface AddToCalendarProps {
+  lang: any;
+}
+
+export const AddToCalendar = ({ lang }: AddToCalendarProps) => {
   const { weekData, dayData, timeData, mealData, repeatOption } =
     useCalendarContext();
   const { updateCalendar } = useCalendarContext();
@@ -33,7 +37,7 @@ export const AddToCalendar = () => {
 
   const handleSubmit = async () => {
     setSubmitting(true);
-    setSubmitLabel("Adding...");
+    setSubmitLabel(lang.adding);
 
     const data = {
       week: weekData,
@@ -44,7 +48,7 @@ export const AddToCalendar = () => {
 
     if (!weekData || !dayData || !timeData) {
       setSubmitting(false);
-      setSubmitLabel("Add to calendar");
+      setSubmitLabel(lang.add);
       return;
     }
 
@@ -117,52 +121,13 @@ export const AddToCalendar = () => {
             setMealData(defaultState.mealData);
             setRepeatOption(defaultState.repeatOption);
             setSubmitting(false);
-            setSubmitLabel("Add another time");
+            setSubmitLabel(lang.add_more);
           });
         })
       )
       .catch((error) => {
         console.log(error.message);
       });
-
-    // loop through items to add to calendar
-    // items.forEach(async (data: ICalendarData) => {
-    //   await axios
-    //     .post("/api/add-to-calendar", {
-    //       data: data,
-    //     })
-    //     .then((res) => {
-    //       console.log(
-    //         "calendar document: ",
-    //         res.data.insertedId ? res.data.insertedId : res.data.acknowledge
-    //       );
-    //     })
-    //     .catch((error) => {
-    //       console.log(error.message);
-    //     });
-    // });
-
-    // await axios
-    //   .post("/api/add-to-calendar", {
-    //     data: data,
-    //   })
-    //   .then((res) => {
-    //     console.log(
-    //       "calendar document: ",
-    //       res.data.insertedId ? res.data.insertedId : res.data.acknowledge
-    //     );
-    //     updateCalendar(() => {
-    //       setWeekData("");
-    //       setDayData("");
-    //       setTimeData("");
-    //       setMealData("");
-    //       setSubmitting(false);
-    //       setSubmitLabel("Add another time");
-    //     });
-    //   })
-    //   .catch((error) => {
-    //     console.log(error.message);
-    //   });
   };
 
   return (
@@ -172,7 +137,7 @@ export const AddToCalendar = () => {
           step={6}
           active={weekData && dayData && timeData ? true : false}
         />
-        Last Step
+        {lang.label}
       </h2>
       {!submitDisabled && (
         <button
@@ -184,10 +149,7 @@ export const AddToCalendar = () => {
         </button>
       )}
       {submitDisabled && (
-        <p className="text-md text-gray-500">
-          Thank you! We have anonymously added your prayer time to our global
-          list of people praying and fasting the PrayerFast Prayer.
-        </p>
+        <p className="text-md text-gray-500">{lang.success}</p>
       )}
     </div>
   );

@@ -5,14 +5,17 @@ import { useCalendarContext } from "./calendar-context";
 // import components
 import { Step } from "./step";
 
-export const RepeatPicker = () => {
+export interface RepeatPickerProps {
+  lang: any;
+}
+export const RepeatPicker = ({ lang }: RepeatPickerProps) => {
   const { timeData, repeatOption, setRepeatOption } = useCalendarContext();
 
   return (
     <div className="px-5 pt-10 md:p-10 md:pb-0 flex-grow">
       <h2 className="text-lg mb-5 flex flex-row items-center">
         <Step step={4} active={timeData ? true : false} />
-        Repeat Options
+        {lang.label}
       </h2>
       <select
         // className={
@@ -28,9 +31,9 @@ export const RepeatPicker = () => {
         disabled={timeData ? false : true}
         value={repeatOption}
       >
-        <option value="m">Every month</option>
-        <option value="b">Every other week</option>
-        <option value="w">Weekly</option>
+        <option value="m">{lang.monthly}</option>
+        <option value="b">{lang.biweekly}</option>
+        <option value="w">{lang.weekly}</option>
       </select>
     </div>
   );

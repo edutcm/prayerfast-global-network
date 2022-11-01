@@ -7,10 +7,11 @@ import groupBy from "lodash/groupBy";
 import { Step } from "./step";
 import { ClockIcon } from "@heroicons/react/outline";
 
-/**
- * Day Picker
- */
-export const DayPicker = () => {
+export interface DayPickerProps {
+  lang: any;
+}
+
+export const DayPicker = ({ lang }: DayPickerProps) => {
   const { days, dayData, weekData, setDayData, calendar } =
     useCalendarContext();
 
@@ -20,7 +21,7 @@ export const DayPicker = () => {
     <div className="px-5 pt-10 md:pl-0 md:pr-10 lg:p-10 lg:pt-0">
       <h2 className="text-lg mb-5 flex flex-row items-center">
         <Step step={2} active={weekData ? true : false} />
-        <span>Pick a Day</span>
+        <span>{lang.label}</span>
       </h2>
       <ul className="space-y-2">
         {days.map((day) => {

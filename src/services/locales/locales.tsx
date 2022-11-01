@@ -25,10 +25,10 @@ export const locales = [
   //   key: "de",
   //   label: "Deutsch",
   // },
-  // {
-  //   key: "es",
-  //   label: "Español",
-  // },
+  {
+    key: "es",
+    label: "Español",
+  },
   // {
   //   key: "et",
   //   label: "Eesti",

@@ -9,30 +9,31 @@ import forEach from "lodash/forEach";
 import type { ICalendarData } from "./calendar-context";
 
 // calendar provider
-export const CalendarProvider: FC<{ children: React.ReactNode }> = ({
+export const CalendarProvider: FC<{ children: React.ReactNode; lang: any }> = ({
   children,
+  lang,
 }) => {
   const weeks: IWeeksProps[] = [
-    { key: 1, value: "Week 1" },
-    { key: 2, value: "Week 2" },
-    { key: 3, value: "Week 3" },
-    { key: 4, value: "Week 4" },
+    { key: 1, value: lang.week.week1 },
+    { key: 2, value: lang.week.week2 },
+    { key: 3, value: lang.week.week3 },
+    { key: 4, value: lang.week.week4 },
   ];
 
   const days: IDaysProps[] = [
-    { key: "u", value: "Sundays" },
-    { key: "m", value: "Mondays" },
-    { key: "t", value: "Tuesdays" },
-    { key: "w", value: "Wednesdays" },
-    { key: "r", value: "Thursdays" },
-    { key: "f", value: "Fridays" },
-    { key: "s", value: "Saturdays" },
+    { key: "u", value: lang.day.sundays },
+    { key: "m", value: lang.day.mondays },
+    { key: "t", value: lang.day.tuesdays },
+    { key: "w", value: lang.day.wednesdays },
+    { key: "r", value: lang.day.thursdays },
+    { key: "f", value: lang.day.fridays },
+    { key: "s", value: lang.day.saturdays },
   ];
 
   const meals: IMealsProps[] = [
-    { key: "b", value: "Breakfast" },
-    { key: "l", value: "Lunch" },
-    { key: "d", value: "Dinner" },
+    { key: "b", value: lang.fast.breakfast },
+    { key: "l", value: lang.fast.lunch },
+    { key: "d", value: lang.fast.dinner },
   ];
 
   const hours: Number[] = [...Array(24).keys()];

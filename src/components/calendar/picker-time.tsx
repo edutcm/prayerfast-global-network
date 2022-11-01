@@ -9,7 +9,10 @@ import { DateTime } from "luxon";
 import { Step } from "./step";
 import { FaPrayingHands } from "react-icons/fa";
 
-export const TimePicker = () => {
+export interface TimePickerProps {
+  lang: any;
+}
+export const TimePicker = ({ lang }: TimePickerProps) => {
   const {
     weeks,
     days,
@@ -79,7 +82,7 @@ export const TimePicker = () => {
       <h2 className="text-lg mb-5 flex justify-between items-center">
         <span className="flex flex-row items-center">
           <Step step={3} active={weekData && dayData ? true : false} />
-          <span>Pick a Prayer Time</span>
+          <span>{lang.label}</span>
         </span>
         {weekData && dayData && (
           <span className="text-sm italic text-gray-500">

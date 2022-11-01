@@ -2,7 +2,11 @@
 import React, { useState, useEffect } from "react";
 import { useCalendarContext } from "./calendar-context";
 
-export const CalendarStats = () => {
+export interface CalendarStatsProps {
+  lang: any;
+}
+
+export const CalendarStats = ({ lang }: CalendarStatsProps) => {
   const {
     statsMinutes,
     statsHours,
@@ -80,22 +84,19 @@ export const CalendarStats = () => {
       }
     >
       <div className="bg-emerald-500 col-span-3 p-5 md:p-10 ">
-        <h2 className="text-xl md:text-2xl mb-3">Join Us</h2>
-        <p className="text-sm md:text-md">
-          Pick a week, day, and time to commit to prayer and fasting with people
-          from all around the world.
-        </p>
+        <h2 className="text-xl md:text-2xl mb-3">{lang.title}</h2>
+        <p className="text-sm md:text-md">{lang.description}</p>
       </div>
 
       <div className="col-span-4 grid grid-cols-4 md:grid-cols-2 lg:grid-cols-4 h-full">
-        <StatsBox count={statsDays} oCount={oDays} label="Days" />
-        <StatsBox count={statsHours} oCount={oHours} label="Hours" />
+        <StatsBox count={statsDays} oCount={oDays} label={lang.days} />
+        <StatsBox count={statsHours} oCount={oHours} label={lang.hours} />
         <StatsBox
           count={statsPrayerTimes}
           oCount={oPrayerTimes}
-          label="Prayer Times"
+          label={lang.prayer_times}
         />
-        <StatsBox count={statsFasts} oCount={oFasts} label="Fast Times" />
+        <StatsBox count={statsFasts} oCount={oFasts} label={lang.fast_times} />
       </div>
     </div>
   );

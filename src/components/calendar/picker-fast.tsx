@@ -5,7 +5,11 @@ import { useCalendarContext } from "./calendar-context";
 // import libs
 import { Step } from "./step";
 
-export const FastPicker = () => {
+export interface FastPickerProps {
+  lang: any;
+}
+
+export const FastPicker = ({ lang }: FastPickerProps) => {
   const { meals, mealData, setMealData, timeData, weekData, dayData } =
     useCalendarContext();
 
@@ -16,7 +20,7 @@ export const FastPicker = () => {
           step={5}
           active={weekData && dayData && timeData ? true : false}
         />
-        Pick a meal
+        {lang.label}
       </h2>
       <select
         className={
@@ -27,7 +31,7 @@ export const FastPicker = () => {
         disabled={timeData ? false : true}
         value={mealData}
       >
-        <option value="">Select a meal</option>
+        <option value="">{lang.select}</option>
         {meals.map((meal, midx) => {
           return (
             <option key={`meal-${midx}`} value={meal.key}>
@@ -36,9 +40,7 @@ export const FastPicker = () => {
           );
         })}
       </select>
-      <p className="text-sm italic text-gray-500">
-        Would you like to choose a meal to fast from for the day?
-      </p>
+      <p className="text-sm italic text-gray-500">{lang.hint}</p>
     </div>
   );
 };
