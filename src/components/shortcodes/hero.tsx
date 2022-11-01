@@ -22,7 +22,7 @@ export const Hero = ({ children, image, ctaLabel, ctaLink }: HeroProps) => {
 
   return (
     <BackgroundImage {...bgImage}>
-      <div className="bg-slate-900/[85%] text-white flex justify-center items-center px-5 py-20 box-border md:min-h-[50vh]">
+      <div className="bg-gray-900/[85%] text-white flex justify-center items-center px-5 py-20 box-border md:min-h-[50vh]">
         <div className="lg:w-3/5 text-center">
           <div className="text-2xl md:text-2xl">{children}</div>
           {ctaLabel && ctaLink && (

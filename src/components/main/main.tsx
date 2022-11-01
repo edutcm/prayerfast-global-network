@@ -29,7 +29,7 @@ const Main = ({ children }: MainProps) => {
   const { appCookies } = useContext(AppContext);
 
   return (
-    <div className="w-screen md:w-[calc(100vw-100px)] h-[calc(100vh-90px)] md:h-screen overflow-y-scroll bg-slate-800 box-border flex flex-col no-scrollbar">
+    <div className="w-screen md:w-[calc(100vw-100px)] h-[calc(100vh-90px)] md:h-screen overflow-y-scroll bg-gray-800 box-border flex flex-col no-scrollbar">
       <main
         className={`${
           !appCookies ? "h-[calc(100vh-60px)]" : "h-full"

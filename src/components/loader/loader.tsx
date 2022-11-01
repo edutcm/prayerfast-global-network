@@ -3,7 +3,7 @@ import React from "react";
 
 const Loader = () => {
   return (
-    <div className="h-screen w-screen flex justify-center items-center bg-slate-800">
+    <div className="h-screen w-screen flex justify-center items-center bg-gray-800">
       <div>
         <div
           style={{

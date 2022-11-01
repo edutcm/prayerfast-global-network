@@ -29,8 +29,8 @@ interface CommitButtonProps {
 // toggle arrow component
 const Toggle = ({ active }: { active: boolean }) => {
   const className = active
-    ? "h-5 w-5 mr-6 ml-4 text-slate-800 bg-emerald-500 rounded-full flex-shrink-0"
-    : "h-5 w-5 mr-6 ml-4 text-green-500 bg-slate-700 rounded-full flex-shrink-0";
+    ? "h-5 w-5 mr-6 ml-4 text-gray-800 bg-emerald-500 rounded-full flex-shrink-0"
+    : "h-5 w-5 mr-6 ml-4 text-green-500 bg-gray-700 rounded-full flex-shrink-0";
 
   if (active) {
     return <ChevronDownIcon className={className} />;
@@ -111,7 +111,7 @@ export const CommitButton = ({
       <div className="relative z-[9900] w-[95%] md:w-4/5 md:m-5 lg:w-[44%]">
         {joinButton && (
           <div
-            className="flex items-center justify-center w-full bg-slate-900/90 rounded-t-md rtl:rounded-t-md rtl:border-l rtl:border-r-0 cursor-pointer"
+            className="flex items-center justify-center w-full bg-gray-900/90 rounded-t-md rtl:rounded-t-md rtl:border-l rtl:border-r-0 cursor-pointer"
             onClick={() => {
               toggleJoin(!join);
             }}
@@ -139,7 +139,7 @@ export const CommitButton = ({
 
         {!joinButton && (
           <div
-            className="flex items-center justify-center w-full bg-slate-900/90 rounded-t-md rtl:rounded-t-md rtl:border-l rtl:border-r-0 cursor-pointer"
+            className="flex items-center justify-center w-full bg-gray-900/90 rounded-t-md rtl:rounded-t-md rtl:border-l rtl:border-r-0 cursor-pointer"
             onClick={() => {
               // navigate to resources page
               const navigateTo = getLocalizedPath("resources", locale);
@@ -168,7 +168,7 @@ export const CommitButton = ({
         )}
 
         {join && (
-          <div className="bg-slate-900/95 p-6 text-white border-t border-slate-700">
+          <div className="bg-gray-900/95 p-6 text-white border-t border-gray-700">
             <div
               className="text-sm mb-6"
               dangerouslySetInnerHTML={{ __html: joinContent }}
@@ -191,18 +191,18 @@ export const CommitButton = ({
                 )}
                 {!disabled && <>{joinLabel}</>}
               </button>
-              <div className="text-xs italic text-slate-500">
+              <div className="text-xs italic text-gray-500">
                 {joinDisclaimer}
               </div>
             </div>
           </div>
         )}
 
-        <div className="bg-slate-900/90 border-t border-slate-700 px-5 py-3 flex items-center justify-center cursor-default">
+        <div className="bg-gray-900/90 border-t border-gray-700 px-5 py-3 flex items-center justify-center cursor-default">
           <div className="text-emerald-200 text-sm text-center">{about}</div>
         </div>
 
-        <div className="bg-slate-900/90 border-t border-slate-700 rounded-b-md width-full cursor-default">
+        <div className="bg-gray-900/90 border-t border-gray-700 rounded-b-md width-full cursor-default">
           <Scoreboard
             people={people}
             languages={languages}

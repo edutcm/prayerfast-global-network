@@ -6,9 +6,9 @@ import { Link } from "gatsby";
 
 const Error = () => {
   return (
-    <div className="h-screen w-screen flex justify-center items-center bg-slate-900">
+    <div className="h-screen w-screen flex justify-center items-center bg-gray-900">
       <div className="text-center">
-        <h1 className="text-slate-500 text-[4rem]">404</h1>
+        <h1 className="text-gray-500 text-[4rem]">404</h1>
         <p>
           <Link
             to="/"

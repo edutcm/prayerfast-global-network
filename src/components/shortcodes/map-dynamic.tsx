@@ -175,7 +175,7 @@ export const DynamicMap = ({ children }: MapProps) => {
         const icon = L.divIcon({
           className: "!w-auto !min-w-[100px] block !z-[8000]",
           html: `<div class="flex text-xs">
-            <div class="bg-slate-900/[65%] text-white rounded-l-md px-3 py-1 text-xs flex justify-center items-center drop-shadow">${location.name}</div>
+            <div class="bg-gray-900/[65%] text-white rounded-l-md px-3 py-1 text-xs flex justify-center items-center drop-shadow">${location.name}</div>
             <div class="bg-emerald-500/[80%] text-white rounded-r-md px-3 py-1 text-xs flex justify-center items-center drop-shadow">${location.count}</div>
           </div>`,
         });
@@ -218,9 +218,9 @@ export const DynamicMap = ({ children }: MapProps) => {
   }, [data, appCookies]);
 
   return (
-    <div className="h-full !bg-slate-800">
+    <div className="h-full !bg-gray-800">
       {loading && <Loader />}
-      <div id="map" className="!bg-slate-800 h-full">
+      <div id="map" className="!bg-gray-800 h-full">
         {children}
       </div>
     </div>
