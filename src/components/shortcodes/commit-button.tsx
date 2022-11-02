@@ -9,6 +9,7 @@ import axios from "axios";
 import { AppContext } from "../../services/app";
 import { GatsbyImage, getImage, IGatsbyImageData } from "gatsby-plugin-image";
 import { FaChevronDown, FaChevronRight } from "react-icons/fa";
+import { HiChevronDoubleDown, HiChevronDoubleUp } from "react-icons/hi";
 import Scoreboard from "../scoreboard";
 
 interface CommitButtonProps {
@@ -60,6 +61,8 @@ export const CommitButton = ({
   const [join, toggleJoin] = useState(false);
   const [disabled, setDisabled] = useState(false);
 
+  const [show, setShow] = useState(true);
+
   const localImage = getImage(image);
 
   /**
@@ -105,34 +108,62 @@ export const CommitButton = ({
       className={`flex justify-center items-end ${
         !appCookies
           ? "h-[calc(100vh-110px)] md:h-[calc(100vh-60px)]"
-          : "h-[calc(100vh-10px)] md:h-screen"
+          : "h-[calc(100vh-12px)] md:h-screen"
       } w-full`}
     >
-      <div className="relative z-[9900] w-[95%] md:w-4/5 md:m-5 lg:w-[44%]">
+      <div
+        className={
+          "relative z-[9900] w-[95%] md:w-4/5 md:m-5 lg:w-[44%] transform " +
+          (show
+            ? "transition-all duration-200 ease-out-in translate-y-0"
+            : "transition-all duration-200 ease-out-in translate-y-3/4")
+        }
+      >
         {joinButton && (
-          <div
-            className="flex items-center justify-center w-full bg-gray-900/90 rounded-t-md rtl:rounded-t-md rtl:border-l rtl:border-r-0 cursor-pointer"
-            onClick={() => {
-              toggleJoin(!join);
-            }}
-          >
-            <div className="text-white flex justify-between items-center h-16">
-              {image && (
-                <div className="pl-6 pr-4 h-16 flex items-center">
-                  {localImage && (
-                    <GatsbyImage
-                      image={localImage}
-                      alt={`PrayerFast Global Network`}
-                      className="w-[40px]"
-                    />
-                  )}
-                </div>
-              )}
-              <div className="text-lg h-16 flex items-center leading-tight text-white">
-                {joinLabel}
+          <div className="flex items-center justify-center w-full bg-gray-900/90 rounded-t-md rtl:rounded-t-md rtl:border-l rtl:border-r-0 relative">
+            <div className="text-white flex items-center h-16 w-full">
+              <div className="absolute right-5">
+                {show && (
+                  <HiChevronDoubleDown
+                    className="h-5 w-5 text-gray-500 cursor-pointer"
+                    onClick={() => {
+                      toggleJoin(false);
+                      setShow(false);
+                    }}
+                  />
+                )}
+                {!show && (
+                  <HiChevronDoubleUp
+                    className="h-5 w-5 text-gray-500 cursor-pointer"
+                    onClick={() => {
+                      setShow(true);
+                    }}
+                  />
+                )}
               </div>
-
-              <Toggle active={join} />
+              <div
+                className="flex flex-row items-center md:justify-center cursor-pointer max-w-md md:max-w-full md:w-full"
+                onClick={() => {
+                  setShow(true);
+                  toggleJoin(!join);
+                }}
+              >
+                {image && (
+                  <div className="pl-6 pr-4 h-16 flex items-center">
+                    {localImage && (
+                      <GatsbyImage
+                        image={localImage}
+                        alt={`PrayerFast Global Network`}
+                        className="w-[40px]"
+                      />
+                    )}
+                  </div>
+                )}
+                <div className="text-lg h-16 flex items-center leading-tight text-white">
+                  {joinLabel}
+                </div>
+                <Toggle active={join} />
+              </div>
             </div>
           </div>
         )}
