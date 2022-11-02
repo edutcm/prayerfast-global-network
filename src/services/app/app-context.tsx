@@ -1,5 +1,5 @@
 // import libs
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 import { AppContextProps } from "./app-provider";
 
 // app context
@@ -11,6 +11,9 @@ const AppContext = createContext<AppContextProps>({
   appCookies: false,
   setAppCookies: () => true || false,
   setCookieNotice: () => true || false,
+  locale: "en",
 });
 
 export default AppContext;
+
+export const useAppContext = () => useContext(AppContext);

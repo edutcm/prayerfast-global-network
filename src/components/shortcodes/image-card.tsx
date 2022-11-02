@@ -18,13 +18,13 @@ export const ImageCard = ({ children, image }: ImageCardProps) => {
           <a
             href="https://www.amazon.com/Prayer-Fasting-Moving-Spirit-Churches/dp/1949921425/ref=sr_1_2?crid=HYWZMUFTN37P&keywords=prayer+and+fasting&qid=1658952220&sprefix=prayer+and+fasting%2Caps%2C96&sr=8-2"
             target="_blank"
-            className="bg-slate-800 text-slate-400 p-2 mt-5 text-center flex items-center"
+            className="bg-gray-800 text-gray-400 p-2 mt-5 text-center flex items-center"
           >
             {localImage && (
               <GatsbyImage
                 image={localImage}
                 alt=""
-                className="border-8 border-slate-900"
+                className="border-8 border-gray-900"
               />
             )}
           </a>

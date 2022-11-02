@@ -15,3 +15,4 @@ export * from "./button";
 export * from "./link";
 export * from "./popup";
 export * from "./social-share";
+export * from "../calendar";

@@ -32,7 +32,7 @@ const LanguageSelector = ({ pageContext, locales }: LanguageSelectorProps) => {
 
   return (
     <div className="absolute bg-black/70 w-screen h-screen flex justify-center items-center z-[9999] top-0 left-0">
-      <div className="bg-slate-900 w-full px-5 py-3 text-white m-5 rounded-md md:w-5/6 lg:w-3/5 -md">
+      <div className="bg-gray-900 w-full px-5 py-3 text-white m-5 rounded-md md:w-5/6 lg:w-3/5 -md">
         <div className="flex flex-col-reverse md:flex-row items-center pb-5">
           <h2 className="text-base md:flex-grow">
             <span>Choose a language</span>{" "}
@@ -42,7 +42,7 @@ const LanguageSelector = ({ pageContext, locales }: LanguageSelectorProps) => {
           </h2>
           <div className="flex justify-end items-center">
             <div
-              className="hover:bg-slate-800 flex justify-end items-center cursor-pointer px-3 py-2 rounded-full text-right"
+              className="hover:bg-gray-800 flex justify-end items-center cursor-pointer px-3 py-2 rounded-full text-right"
               onClick={() => toggleSwitcher(false)}
             >
               <span className="text-sm">
@@ -70,13 +70,13 @@ const LanguageSelector = ({ pageContext, locales }: LanguageSelectorProps) => {
                   className={`${
                     active
                       ? "bg-emerald-500 text-white"
-                      : "bg-slate-800 text-slate-400"
+                      : "bg-gray-800 text-gray-400"
                   } col-span-2 group-hover:bg-emerald-500 group-hover:text-white px-3 py-2 text-sm rounded-l-md rtl:rounded-r-md rtl:rounded-l-none text-center`}
                 >
                   {locale.key}
                 </span>
                 <span
-                  className={`col-span-5 bg-slate-700 group-hover:bg-slate-600 px-3 py-2 text-sm rounded-r-md rtl:rounded-r-none rtl:rounded-l-md`}
+                  className={`col-span-5 bg-gray-700 group-hover:bg-gray-600 px-3 py-2 text-sm rounded-r-md rtl:rounded-r-none rtl:rounded-l-md`}
                 >
                   {locale.label}
                 </span>

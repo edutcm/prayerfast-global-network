@@ -77,27 +77,27 @@ const Scoreboard = ({
   };
 
   return (
-    <div className="flex flex-wrap text-slate-400 text-center">
+    <div className="flex flex-wrap text-gray-400 text-center">
       <Counter
         text={people}
         count={totalPeople}
-        className="flex justify-center items-center h-9 grow border-slate-700 border-r border-b md:border-b-0"
+        className="flex justify-center items-center h-9 grow border-gray-700 border-r border-b md:border-b-0"
       />
       <Counter
         text={languages}
         count={totalLanguages}
-        className="flex justify-center items-center h-9 grow border-slate-700 border-r border-b md:border-b-0"
+        className="flex justify-center items-center h-9 grow border-gray-700 border-r border-b md:border-b-0"
       />
       <div className="basis-full h-0 md:basis-0" />
       <Counter
         text={cities}
         count={totalCities}
-        className="flex justify-center items-center h-9 grow border-slate-700 border-r border-b md:border-b-0"
+        className="flex justify-center items-center h-9 grow border-gray-700 border-r border-b md:border-b-0"
       />
       <Counter
         text={countries}
         count={totalCountries}
-        className="flex justify-center items-center h-9 grow border-slate-700 border-r"
+        className="flex justify-center items-center h-9 grow border-gray-700 border-r"
       />
       <Counter
         text={timezones}
@@ -123,7 +123,7 @@ const Counter = ({ text, count, className }: CounterProps) => {
             style={{
               borderTopColor: "transparent",
             }}
-            className="w-3 h-3 border-2 border-slate-700 border-solid rounded-full animate-spin"
+            className="w-3 h-3 border-2 border-gray-700 border-solid rounded-full animate-spin"
           ></div>
         </div>
       </div>

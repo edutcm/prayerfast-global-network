@@ -15,14 +15,16 @@ export interface AppContextProps {
   setJoinButton?: Dispatch<SetStateAction<boolean>>;
   setCookieNotice?: (value: boolean) => boolean;
   setPrayerFastButton?: (value: boolean) => boolean;
+  locale: string;
 }
 
 interface AppProviderProps extends AppContextProps {
   children: React.ReactNode;
+  locale: string;
 }
 
 // app provider
-const AppProvider = ({ children }: AppProviderProps) => {
+const AppProvider = ({ children, locale }: AppProviderProps) => {
   // state
   const [geodata, setGeodata] = useState<Array<GeodataProps>>([]);
   const [switcher, toggleSwitcher] = useState<boolean>(false);
@@ -83,6 +85,7 @@ const AppProvider = ({ children }: AppProviderProps) => {
         joinButton,
         setJoinButton,
         setPrayerFastButton,
+        locale,
       }}
     >
       {children}
