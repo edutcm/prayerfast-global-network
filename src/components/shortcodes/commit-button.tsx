@@ -169,15 +169,34 @@ export const CommitButton = ({
         )}
 
         {!joinButton && (
-          <div
-            className="flex items-center justify-center w-full bg-gray-900/90 rounded-t-md rtl:rounded-t-md rtl:border-l rtl:border-r-0 cursor-pointer"
-            onClick={() => {
-              // navigate to resources page
-              const navigateTo = getLocalizedPath("resources", locale);
-              navigate(navigateTo);
-            }}
-          >
-            <div className="text-white flex justify-between items-center h-16">
+          <div className="flex items-center justify-center w-full bg-gray-900/90 rounded-t-md rtl:rounded-t-md rtl:border-l rtl:border-r-0">
+            <div className="absolute right-5">
+              {show && (
+                <HiChevronDoubleDown
+                  className="h-5 w-5 text-gray-500 cursor-pointer"
+                  onClick={() => {
+                    toggleJoin(false);
+                    setShow(false);
+                  }}
+                />
+              )}
+              {!show && (
+                <HiChevronDoubleUp
+                  className="h-5 w-5 text-gray-500 cursor-pointer"
+                  onClick={() => {
+                    setShow(true);
+                  }}
+                />
+              )}
+            </div>
+            <div
+              className="text-white flex justify-between items-center h-16 cursor-pointer"
+              onClick={() => {
+                // navigate to resources page
+                const navigateTo = getLocalizedPath("resources", locale);
+                navigate(navigateTo);
+              }}
+            >
               {image && (
                 <div className="pl-6 pr-4 h-16 flex items-center">
                   {localImage && (
