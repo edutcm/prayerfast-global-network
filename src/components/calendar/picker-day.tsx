@@ -18,7 +18,7 @@ export const DayPicker = ({ lang }: DayPickerProps) => {
   const calWeek = groupBy(calendar, "week");
 
   return (
-    <div className="px-5 pt-10 md:pl-0 md:pr-10 lg:p-10 lg:pt-0">
+    <div className="px-5 pt-10 md:pl-0 md:pr-10 lg:p-10 lg:pt-5">
       <h2 className="text-lg mb-5 flex flex-row items-center">
         <Step step={2} active={weekData ? true : false} />
         <span>{lang.label}</span>

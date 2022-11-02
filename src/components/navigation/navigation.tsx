@@ -49,7 +49,9 @@ const Navigation = ({ pageContext, locales }: NavigationProps) => {
   return (
     <nav
       className={`flex justify-between items-center px-5 py-3 md:px-10 fixed z-[9000] w-screen backdrop-blur-md xl:backdrop-blur-0 ${
-        pageContext.slug === "index" ? "bg-gray-900/70" : "bg-gray-900/20"
+        pageContext.slug === "index"
+          ? "bg-gray-900/70 !backdrop-blur-sm"
+          : "bg-gray-900/20"
       }`}
     >
       <div className="flex flex-row items-center ">
