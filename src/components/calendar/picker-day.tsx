@@ -6,6 +6,7 @@ import groupBy from "lodash/groupBy";
 // import libs
 import { Step } from "./step";
 import { ClockIcon } from "@heroicons/react/outline";
+import { Radial } from "./radial";
 
 export interface DayPickerProps {
   lang: any;
@@ -36,24 +37,35 @@ export const DayPicker = ({ lang }: DayPickerProps) => {
             <li key={day.key}>
               <button
                 className={
-                  "disabled:text-gray-500 disabled:bg-gray-700 disabled:cursor-not-allowed flex flex-row w-full rounded-md group"
+                  "disabled:text-gray-500 disabled:bg-gray-700 disabled:cursor-not-allowed " +
+                  "flex flex-row w-full rounded-md group"
                 }
                 onClick={() => setDayData(day.key)}
                 disabled={weekData ? false : true}
               >
-                <span
+                <div
                   className={
-                    "px-3 py-1 flex-grow rounded-tl-md rounded-bl-md text-left " +
+                    "px-3 py-1 flex-grow rounded-tl-md rounded-bl-md text-left group-disabled:bg-gray-700 " +
                     (day.key === dayData
                       ? "bg-emerald-600 group-hover:bg-emerald-500"
                       : "bg-gray-700 group-hover:bg-emerald-600")
                   }
                 >
                   {day.value}
-                </span>
-                <span
+                </div>
+                <div
                   className={
-                    "px-3 py-1 rounded-tr-md rounded-br-md flex flex-row space-x-2 items-center " +
+                    "px-3 rounded-tr-md rounded-br-md flex flex-row items-center justify-center group-disabled:bg-gray-600 h-8 leading-5 " +
+                    (day.key === dayData
+                      ? "bg-emerald-500 group-hover:bg-emerald-400"
+                      : "bg-gray-600 group-hover:bg-emerald-500")
+                  }
+                >
+                  <Radial percentage={(timesCount / 48) * 100} />
+                </div>
+                {/* <span
+                  className={
+                    "px-3 py-1 rounded-tr-md rounded-br-md flex flex-row space-x-2 items-center group-disabled:bg-gray-600 " +
                     (day.key === dayData
                       ? "bg-emerald-500 group-hover:bg-emerald-400"
                       : "bg-gray-600 group-hover:bg-emerald-500")
@@ -61,7 +73,7 @@ export const DayPicker = ({ lang }: DayPickerProps) => {
                 >
                   <span>{timesCount}</span>
                   <ClockIcon className="h-[18px] w-[18px]" />
-                </span>
+                </span> */}
               </button>
             </li>
           );

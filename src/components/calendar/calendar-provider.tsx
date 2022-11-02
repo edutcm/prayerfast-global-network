@@ -113,6 +113,13 @@ export const CalendarProvider: FC<{ children: React.ReactNode; lang: any }> = ({
     setStatsFasts(fasts);
   }, [calendar]);
 
+  /**
+   * Submit
+   */
+  const [globalDisabled, setGlobalDisabled] = useState(
+    defaultState.globalDisabled
+  );
+
   return (
     <CalendarContext.Provider
       value={{
@@ -149,6 +156,9 @@ export const CalendarProvider: FC<{ children: React.ReactNode; lang: any }> = ({
         setMealData,
         repeatOption,
         setRepeatOption,
+        // submit
+        globalDisabled,
+        setGlobalDisabled,
       }}
     >
       {children}

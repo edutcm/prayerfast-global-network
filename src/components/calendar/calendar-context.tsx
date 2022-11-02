@@ -57,6 +57,9 @@ export interface ICalendarContextProps {
   setMealData: Dispatch<SetStateAction<string>>;
   repeatOption: string;
   setRepeatOption: Dispatch<SetStateAction<string>>;
+  // submit
+  globalDisabled: boolean;
+  setGlobalDisabled: Dispatch<SetStateAction<boolean>>;
 }
 
 export const defaultState = {
@@ -93,6 +96,9 @@ export const defaultState = {
   setMealData: () => null,
   repeatOption: "m",
   setRepeatOption: () => null,
+  // submit
+  globalDisabled: false,
+  setGlobalDisabled: () => null,
 };
 
 // app context

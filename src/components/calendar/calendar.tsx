@@ -35,7 +35,7 @@ export const Calendar = ({ lang }: CalendarProps) => {
           <div className="lg:h-full border-r border-gray-900 lg:overflow-y-scroll no-scrollbar flex-grow">
             <TimePicker lang={time} />
           </div>
-          <div className="lg:h-full border-r border-gray-900 lg:overflow-y-scroll w-full no-scrollbar flex-grow lg:max-w-xs">
+          <div className="lg:h-full lg:overflow-y-scroll w-full no-scrollbar flex-grow lg:max-w-xs">
             <RepeatPicker lang={repeat} />
             <FastPicker lang={fast} />
             <AddToCalendar lang={add} />

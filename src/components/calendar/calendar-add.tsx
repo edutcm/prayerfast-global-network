@@ -18,12 +18,19 @@ export const AddToCalendar = ({ lang }: AddToCalendarProps) => {
   const { weekData, dayData, timeData, mealData, repeatOption } =
     useCalendarContext();
   const { updateCalendar } = useCalendarContext();
-  const { setWeekData, setDayData, setTimeData, setMealData, setRepeatOption } =
-    useCalendarContext();
+  const {
+    setWeekData,
+    setDayData,
+    setTimeData,
+    setMealData,
+    setRepeatOption,
+    setGlobalDisabled,
+  } = useCalendarContext();
 
   const [submitDisabled, setSubmitDisabled] = useState(true);
   const [submitting, setSubmitting] = useState(false);
-  const [submitLabel, setSubmitLabel] = useState("Add to calendar");
+  const [submitLabel, setSubmitLabel] = useState(lang.add);
+  const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
     if (submitting) {
@@ -36,6 +43,7 @@ export const AddToCalendar = ({ lang }: AddToCalendarProps) => {
   }, [submitting, weekData, dayData, timeData]);
 
   const handleSubmit = async () => {
+    setGlobalDisabled(true);
     setSubmitting(true);
     setSubmitLabel(lang.adding);
 
@@ -106,6 +114,7 @@ export const AddToCalendar = ({ lang }: AddToCalendarProps) => {
       .all(requests)
       .then(
         axios.spread((...responses) => {
+          setSubmitted(true);
           responses.forEach((response) => {
             console.log(
               "calendar document: ",
@@ -115,19 +124,25 @@ export const AddToCalendar = ({ lang }: AddToCalendarProps) => {
             );
           });
           updateCalendar(() => {
+            setSubmitting(false);
             setWeekData(defaultState.weekData);
             setDayData(defaultState.dayData);
             setTimeData(defaultState.timeData);
             setMealData(defaultState.mealData);
             setRepeatOption(defaultState.repeatOption);
-            setSubmitting(false);
-            setSubmitLabel(lang.add_more);
           });
         })
       )
       .catch((error) => {
         console.log(error.message);
       });
+  };
+
+  const resetForm = () => {
+    setGlobalDisabled(false);
+    setSubmitDisabled(true);
+    setSubmitLabel(lang.add);
+    setSubmitted(false);
   };
 
   return (
@@ -139,17 +154,25 @@ export const AddToCalendar = ({ lang }: AddToCalendarProps) => {
         />
         {lang.label}
       </h2>
-      {!submitDisabled && (
+      {!submitted && (
         <button
-          className="px-3 py-2 bg-emerald-500/80 hover:bg-emerald-500 rounded-md border-0 disabled:bg-gray-700 disabled:text-gray-500 disabled:cursor-not-allowed"
+          className="px-3 py-2 bg-emerald-500/80 hover:bg-emerald-500 rounded-md border-0 disabled:bg-gray-700 disabled:text-gray-500 disabled:cursor-not-allowed mb-3"
           onClick={async () => handleSubmit()}
           disabled={submitDisabled}
         >
           {submitLabel}
         </button>
       )}
-      {submitDisabled && (
-        <p className="text-md text-gray-500">{lang.success}</p>
+      {submitted && (
+        <>
+          <button
+            className="px-3 py-2 bg-emerald-500/80 hover:bg-emerald-500 rounded-md border-0 disabled:bg-gray-700 disabled:text-gray-500 disabled:cursor-not-allowed mb-3"
+            onClick={async () => resetForm()}
+          >
+            {lang.add_more}
+          </button>
+          <p className="text-md text-gray-300">{lang.success}</p>
+        </>
       )}
     </div>
   );

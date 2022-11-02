@@ -22,10 +22,14 @@ export const TimePicker = ({ lang }: TimePickerProps) => {
     setTimeData,
     calendar,
     hours,
+    globalDisabled,
   } = useCalendarContext();
 
   const { locale } = useAppContext();
   const [times, setTimes] = useState<any>([]);
+  const [options, setOptions] = useState<any>([]);
+  const [weekLabel, setWeekLabel] = useState("");
+  const [dayLabel, setDayLabel] = useState("");
 
   useEffect(() => {
     const calWeek = groupBy(calendar, "week");
@@ -40,45 +44,59 @@ export const TimePicker = ({ lang }: TimePickerProps) => {
       const filteredTimes = calDays[dayItem.key] || [];
 
       setTimes(filteredTimes);
+    } else {
+      setTimes([]);
     }
   }, [calendar, weekData, dayData, timeData]);
 
-  let timeSlots: any = [];
+  useEffect(() => {
+    let timeSlots: any = [];
 
-  hours.forEach((hour) => {
-    const leadingZero = hour < 10 ? "0" : "";
-    timeSlots.push(`${leadingZero}${hour}:00`);
-    timeSlots.push(`${leadingZero}${hour}:30`);
-  });
-
-  // datetime setup
-  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  const cdt = DateTime.local();
-  const date = cdt.toFormat("y-MM-dd");
-  let options: any = [];
-  timeSlots.forEach((time: any) => {
-    const dt = DateTime.fromISO(`${date}T${time}:00`, { zone: "utc" });
-    const kdt = dt.setLocale(locale).setZone(timezone);
-
-    options.push({
-      key: time,
-      value: `${kdt.toLocaleString(DateTime.TIME_SIMPLE)}`,
-      // value: `${kdt.toLocaleString(DateTime.TIME_SIMPLE)} ${kdt.toFormat(
-      //   "ZZZZ"
-      // )}`,
-      datetime: kdt,
+    hours.forEach((hour) => {
+      const leadingZero = hour < 10 ? "0" : "";
+      timeSlots.push(`${leadingZero}${hour}:00`);
+      timeSlots.push(`${leadingZero}${hour}:30`);
     });
-  });
 
-  options.sort((a: any, b: any) => {
-    return a.datetime.toFormat("HHmm") - b.datetime.toFormat("HHmm");
-  });
+    // datetime setup
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const cdt = DateTime.local();
+    const date = cdt.toFormat("y-MM-dd");
+    let options: any = [];
+    timeSlots.forEach((time: any) => {
+      const dt = DateTime.fromISO(`${date}T${time}:00`, { zone: "utc" });
+      const kdt = dt.setLocale(locale).setZone(timezone);
 
-  const weekLabel = weeks.filter((week) => week.key === parseInt(weekData));
-  const dayLabel = days.filter((day) => day.key === dayData);
+      options.push({
+        key: time,
+        value: `${kdt.toLocaleString(DateTime.TIME_SIMPLE)}`,
+        // value: `${kdt.toLocaleString(DateTime.TIME_SIMPLE)} ${kdt.toFormat(
+        //   "ZZZZ"
+        // )}`,
+        datetime: kdt,
+      });
+    });
+
+    options.sort((a: any, b: any) => {
+      return a.datetime.toFormat("HHmm") - b.datetime.toFormat("HHmm");
+    });
+
+    setOptions(options);
+
+    const weekLabel = weeks.filter((week) => week.key === parseInt(weekData));
+    const dayLabel = days.filter((day) => day.key === dayData);
+
+    if (weekLabel.length > 0) {
+      setWeekLabel(weekLabel[0].value);
+    }
+
+    if (dayLabel.length > 0) {
+      setDayLabel(dayLabel[0].value);
+    }
+  }, [weekData, dayData, timeData]);
 
   return (
-    <div className="px-5 pt-10 md:p-10 md:pb-0 flex-grow">
+    <div className="px-5 pt-10 md:p-10 md:pb-0 lg:pb-10 flex-grow">
       <h2 className="text-lg mb-5 flex justify-between items-center">
         <span className="flex flex-row items-center">
           <Step step={3} active={weekData && dayData ? true : false} />
@@ -86,7 +104,7 @@ export const TimePicker = ({ lang }: TimePickerProps) => {
         </span>
         {weekData && dayData && (
           <span className="text-sm italic text-gray-500">
-            ({weekLabel[0].value}-{dayLabel[0].value})
+            ({weekLabel}-{dayLabel})
           </span>
         )}
       </h2>
