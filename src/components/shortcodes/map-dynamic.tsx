@@ -101,7 +101,7 @@ export const DynamicMap = ({ children }: MapProps) => {
   useEffect(() => {
     // leaflet map
     const map = L.map("map", {
-      zoomControl: true,
+      zoomControl: false,
       attributionControl: false,
       minZoom: 2.15,
       maxZoom: 8,

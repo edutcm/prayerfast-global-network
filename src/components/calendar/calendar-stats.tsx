@@ -1,12 +1,20 @@
 // import libs
 import React, { useState, useEffect } from "react";
 import { useCalendarContext } from "./calendar-context";
+import { convertToBgImage } from "gbimage-bridge";
+import { getImage, IGatsbyImageData } from "gatsby-plugin-image";
 
+// import components
+import BackgroundImage from "gatsby-background-image";
 export interface CalendarStatsProps {
   lang: any;
+  image: IGatsbyImageData;
 }
 
-export const CalendarStats = ({ lang }: CalendarStatsProps) => {
+export const CalendarStats = ({ lang, image }: CalendarStatsProps) => {
+  const localImage = getImage(image);
+  const bgImage = convertToBgImage(localImage);
+
   const { statsHours, statsDays, statsPrayerTimes, statsFasts } =
     useCalendarContext();
 
@@ -56,11 +64,7 @@ export const CalendarStats = ({ lang }: CalendarStatsProps) => {
   const StatsBox = ({ count, oCount, label, percentage }: StatsBoxProps) => {
     return (
       <div
-        className={`${
-          count === oCount
-            ? "bg-emerald-600 text-emerald-200"
-            : "bg-emerald-700 text-white"
-        } p-5 h-full text-center flex flex-col justify-start md:justify-center items-center transition-all duration-200 ease-in-out`}
+        className={`text-center flex flex-col justify-start md:justify-center items-center transition-all duration-200 ease-in-out`}
       >
         <div className="relative">
           <div
@@ -94,43 +98,44 @@ export const CalendarStats = ({ lang }: CalendarStatsProps) => {
   };
 
   return (
-    <div
-      className={
-        "text-white bg-emerald-500 grid grid-cols-1 items-center " +
-        "md:grid-cols-7"
-      }
-    >
-      <div className="bg-emerald-500 col-span-2 p-5 md:p-10 ">
-        <h2 className="text-xl md:text-2xl mb-3">{lang.title}</h2>
-        <p className="text-sm md:text-md">{lang.description}</p>
-      </div>
+    <BackgroundImage {...bgImage}>
+      <div
+        className={
+          "bg-gray-900/[85%] text-white grid grid-cols-1 md:grid-cols-7 pt-20 px-5 md:px-10"
+        }
+      >
+        <div className="md:col-span-2 md:h-full flex flex-col items-center justify-center text-center md:text-left md:items-start">
+          <h2 className="text-xl md:text-2xl mb-3">{lang.title}</h2>
+          <p className="text-sm md:text-md">{lang.description}</p>
+        </div>
 
-      <div className="col-span-5 grid grid-cols-4 md:grid-cols-2 lg:grid-cols-4 h-full">
-        <StatsBox
-          count={statsDays}
-          oCount={oDays}
-          label={lang.days}
-          percentage={(statsDays / 28) * 100}
-        />
-        <StatsBox
-          count={statsHours}
-          oCount={oHours}
-          label={lang.hours}
-          percentage={(statsHours / (24 * 28)) * 100}
-        />
-        <StatsBox
-          count={statsPrayerTimes}
-          oCount={oPrayerTimes}
-          label={lang.prayer_times}
-          percentage={(statsPrayerTimes / (48 * 28)) * 100}
-        />
-        <StatsBox
-          count={statsFasts}
-          oCount={oFasts}
-          label={lang.fast_times}
-          percentage={(statsFasts / (3 * 28)) * 100}
-        />
+        <div className=" px-5 py-10 md:col-span-5 grid gap-5 grid-cols-2 md:grid-cols-2 lg:grid-cols-4 md:h-full">
+          <StatsBox
+            count={statsDays}
+            oCount={oDays}
+            label={lang.days}
+            percentage={(statsDays / 28) * 100}
+          />
+          <StatsBox
+            count={statsHours}
+            oCount={oHours}
+            label={lang.hours}
+            percentage={(statsHours / (24 * 28)) * 100}
+          />
+          <StatsBox
+            count={statsPrayerTimes}
+            oCount={oPrayerTimes}
+            label={lang.prayer_times}
+            percentage={(statsPrayerTimes / (48 * 28)) * 100}
+          />
+          <StatsBox
+            count={statsFasts}
+            oCount={oFasts}
+            label={lang.fast_times}
+            percentage={(statsFasts / (3 * 28)) * 100}
+          />
+        </div>
       </div>
-    </div>
+    </BackgroundImage>
   );
 };

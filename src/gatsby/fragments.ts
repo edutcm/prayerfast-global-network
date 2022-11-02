@@ -43,6 +43,8 @@ export const LocaleFragment = graphql`
         home
         resources
         mobilize
+        calendar
+        menu
       }
       misc {
         getTheBook

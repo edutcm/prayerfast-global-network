@@ -13,20 +13,21 @@ import { AddToCalendar } from "./calendar-add";
 
 export interface CalendarProps {
   lang: any;
+  image: any;
 }
 
-export const Calendar = ({ lang }: CalendarProps) => {
+export const Calendar = ({ lang, image }: CalendarProps) => {
   const { stats, week, day, time, repeat, fast, add } = lang;
 
   return (
     <CalendarProvider lang={lang}>
-      <div className="flex flex-col text-white h-screen">
-        <CalendarStats lang={stats} />
+      <div className="flex flex-col text-white">
+        <CalendarStats lang={stats} image={image} />
         <div className="flex flex-col lg:flex-row flex-grow md:h-4/5">
           <div
             className={
               "grid grid-cols-1 md:grid-cols-2 sm:gap-2 border-gray-900 w-full " +
-              "md:gap-0 lg:h-full lg:overflow-y-scroll lg:border-r lg:grid-cols-1 lg:max-w-xs"
+              "md:gap-2 lg:h-full lg:overflow-y-scroll lg:border-r lg:grid-cols-1 lg:max-w-xs"
             }
           >
             <WeekPicker lang={week} />

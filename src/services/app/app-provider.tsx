@@ -1,24 +1,10 @@
 // import libs
-import React, { useState, useEffect, Dispatch, SetStateAction } from "react";
-import AppContext from "./app-context";
+import React, { useState, useEffect } from "react";
+import AppContext, { defaultState } from "./app-context";
 import { GeodataProps } from "../geolocation";
 import { useCookies } from "react-cookie";
 
-export interface AppContextProps {
-  geodata?: Array<GeodataProps>;
-  setGeodata?: Dispatch<SetStateAction<Array<GeodataProps>>>;
-  switcher?: boolean;
-  toggleSwitcher?: Dispatch<SetStateAction<boolean>>;
-  appCookies?: boolean;
-  setAppCookies?: Dispatch<SetStateAction<boolean>>;
-  joinButton?: boolean;
-  setJoinButton?: Dispatch<SetStateAction<boolean>>;
-  setCookieNotice?: (value: boolean) => boolean;
-  setPrayerFastButton?: (value: boolean) => boolean;
-  locale: string;
-}
-
-interface AppProviderProps extends AppContextProps {
+interface AppProviderProps {
   children: React.ReactNode;
   locale: string;
 }
@@ -27,9 +13,16 @@ interface AppProviderProps extends AppContextProps {
 const AppProvider = ({ children, locale }: AppProviderProps) => {
   // state
   const [geodata, setGeodata] = useState<Array<GeodataProps>>([]);
-  const [switcher, toggleSwitcher] = useState<boolean>(false);
-  const [appCookies, setAppCookies] = useState<boolean>(true);
-  const [joinButton, setJoinButton] = useState<boolean>(true);
+  const [switcher, toggleSwitcher] = useState<boolean>(defaultState.switcher);
+  const [mobileMenu, setMobileMenu] = useState<boolean>(
+    defaultState.mobileMenu
+  );
+  const [appCookies, setAppCookies] = useState<boolean>(
+    defaultState.appCookies
+  );
+  const [joinButton, setJoinButton] = useState<boolean>(
+    defaultState.joinButton
+  );
 
   // cookies
   const [cookies, setCookie, removeCookie] = useCookies([
@@ -79,6 +72,8 @@ const AppProvider = ({ children, locale }: AppProviderProps) => {
         setGeodata,
         switcher,
         toggleSwitcher,
+        mobileMenu,
+        setMobileMenu,
         appCookies,
         setAppCookies,
         setCookieNotice,
