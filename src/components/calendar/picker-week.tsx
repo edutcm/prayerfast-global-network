@@ -5,7 +5,6 @@ import groupBy from "lodash/groupBy";
 
 // import components
 import { Step } from "./step";
-import { CalendarIcon } from "@heroicons/react/outline";
 import { Radial } from "./radial";
 
 export interface WeekPickerProps {

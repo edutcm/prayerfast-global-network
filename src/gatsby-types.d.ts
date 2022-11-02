@@ -1039,7 +1039,9 @@ type FileFieldsEnum =
   | 'childMdx.frontmatter.misc.chooseLanguage'
   | 'childMdx.frontmatter.misc.close'
   | 'childMdx.frontmatter.misc.getTheBook'
+  | 'childMdx.frontmatter.navigation.calendar'
   | 'childMdx.frontmatter.navigation.home'
+  | 'childMdx.frontmatter.navigation.menu'
   | 'childMdx.frontmatter.navigation.mobilize'
   | 'childMdx.frontmatter.navigation.resources'
   | 'childMdx.frontmatter.siteName'
@@ -1336,7 +1338,9 @@ type FileFieldsEnum =
   | 'childrenMdx.frontmatter.misc.chooseLanguage'
   | 'childrenMdx.frontmatter.misc.close'
   | 'childrenMdx.frontmatter.misc.getTheBook'
+  | 'childrenMdx.frontmatter.navigation.calendar'
   | 'childrenMdx.frontmatter.navigation.home'
+  | 'childrenMdx.frontmatter.navigation.menu'
   | 'childrenMdx.frontmatter.navigation.mobilize'
   | 'childrenMdx.frontmatter.navigation.resources'
   | 'childrenMdx.frontmatter.siteName'
@@ -2547,7 +2551,9 @@ type MdxFieldsEnum =
   | 'frontmatter.misc.chooseLanguage'
   | 'frontmatter.misc.close'
   | 'frontmatter.misc.getTheBook'
+  | 'frontmatter.navigation.calendar'
   | 'frontmatter.navigation.home'
+  | 'frontmatter.navigation.menu'
   | 'frontmatter.navigation.mobilize'
   | 'frontmatter.navigation.resources'
   | 'frontmatter.siteName'
@@ -2677,13 +2683,17 @@ type MdxFrontmatterMiscFilterInput = {
 };
 
 type MdxFrontmatterNavigation = {
+  readonly calendar: Maybe<Scalars['String']>;
   readonly home: Maybe<Scalars['String']>;
+  readonly menu: Maybe<Scalars['String']>;
   readonly mobilize: Maybe<Scalars['String']>;
   readonly resources: Maybe<Scalars['String']>;
 };
 
 type MdxFrontmatterNavigationFilterInput = {
+  readonly calendar: InputMaybe<StringQueryOperatorInput>;
   readonly home: InputMaybe<StringQueryOperatorInput>;
+  readonly menu: InputMaybe<StringQueryOperatorInput>;
   readonly mobilize: InputMaybe<StringQueryOperatorInput>;
   readonly resources: InputMaybe<StringQueryOperatorInput>;
 };
@@ -4612,7 +4622,7 @@ type GatsbyImageSharpFluid_withWebp_tracedSVGFragment = { readonly tracedSVG: st
 
 type GatsbyImageSharpFluidLimitPresentationSizeFragment = { readonly maxHeight: number, readonly maxWidth: number };
 
-type LocaleFragementFragment = { readonly frontmatter: { readonly siteName: string | null, readonly navigation: { readonly home: string | null, readonly resources: string | null, readonly mobilize: string | null } | null, readonly misc: { readonly getTheBook: string | null, readonly chooseLanguage: string | null, readonly close: string | null } | null } | null, readonly fields: { readonly templateKey: string | null, readonly locale: string | null } | null };
+type LocaleFragementFragment = { readonly frontmatter: { readonly siteName: string | null, readonly navigation: { readonly home: string | null, readonly resources: string | null, readonly mobilize: string | null, readonly calendar: string | null, readonly menu: string | null } | null, readonly misc: { readonly getTheBook: string | null, readonly chooseLanguage: string | null, readonly close: string | null } | null } | null, readonly fields: { readonly templateKey: string | null, readonly locale: string | null } | null };
 
 type PageFragmentFragment = { readonly id: string, readonly body: string, readonly frontmatter: { readonly slug: string | null, readonly title: string, readonly image1: { readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData } | null } | null, readonly image2: { readonly childImageSharp: { readonly gatsbyImageData: import('gatsby-plugin-image').IGatsbyImageData } | null } | null } | null, readonly fields: { readonly locale: string | null, readonly templateKey: string | null } | null };
 

@@ -1,3 +1,5 @@
+const defaultTheme = require("tailwindcss/defaultTheme");
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -17,6 +19,8 @@ module.exports = {
       },
       screens: {
         standalone: { raw: "(display-mode: standalone)" },
+        xs: { min: "380px", max: "767px" },
+        ...defaultTheme.screens,
       },
     },
   },

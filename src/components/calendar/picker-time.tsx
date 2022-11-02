@@ -22,7 +22,6 @@ export const TimePicker = ({ lang }: TimePickerProps) => {
     setTimeData,
     calendar,
     hours,
-    globalDisabled,
   } = useCalendarContext();
 
   const { locale } = useAppContext();
@@ -108,7 +107,7 @@ export const TimePicker = ({ lang }: TimePickerProps) => {
           </span>
         )}
       </h2>
-      <ul className="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-4 gap-2">
+      <ul className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-2 2xl:grid-cols-4 gap-2">
         {options.map((time: any) => {
           let timeExists: any = [];
           let timeObject: any;

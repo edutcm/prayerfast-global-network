@@ -1,0 +1,72 @@
+"filename", "language", "CSS", "TypeScript React", "TypeScript", "JavaScript", "comment", "blank", "total"
+"/Users/kaleb/Clients/prayerfast-network/src/api/add-to-calendar.ts", "TypeScript", 0, 0, 93, 0, 12, 18, 123
+"/Users/kaleb/Clients/prayerfast-network/src/api/calendar.ts", "TypeScript", 0, 0, 42, 0, 10, 13, 65
+"/Users/kaleb/Clients/prayerfast-network/src/api/geodata.ts", "TypeScript", 0, 0, 58, 0, 11, 14, 83
+"/Users/kaleb/Clients/prayerfast-network/src/api/join.ts", "TypeScript", 0, 0, 86, 0, 14, 15, 115
+"/Users/kaleb/Clients/prayerfast-network/src/cms/cms.js", "JavaScript", 0, 0, 0, 0, 0, 1, 1
+"/Users/kaleb/Clients/prayerfast-network/src/components/calendar/calendar-add.tsx", "TypeScript React", 0, 157, 0, 0, 6, 17, 180
+"/Users/kaleb/Clients/prayerfast-network/src/components/calendar/calendar-context.tsx", "TypeScript React", 0, 88, 0, 0, 12, 9, 109
+"/Users/kaleb/Clients/prayerfast-network/src/components/calendar/calendar-provider.tsx", "TypeScript React", 0, 134, 0, 0, 13, 21, 168
+"/Users/kaleb/Clients/prayerfast-network/src/components/calendar/calendar-stats.tsx", "TypeScript React", 0, 111, 0, 0, 15, 11, 137
+"/Users/kaleb/Clients/prayerfast-network/src/components/calendar/calendar.tsx", "TypeScript React", 0, 41, 0, 0, 2, 5, 48
+"/Users/kaleb/Clients/prayerfast-network/src/components/calendar/index.tsx", "TypeScript React", 0, 3, 0, 0, 0, 1, 4
+"/Users/kaleb/Clients/prayerfast-network/src/components/calendar/picker-day.tsx", "TypeScript React", 0, 64, 0, 0, 13, 8, 85
+"/Users/kaleb/Clients/prayerfast-network/src/components/calendar/picker-fast.tsx", "TypeScript React", 0, 40, 0, 0, 2, 5, 47
+"/Users/kaleb/Clients/prayerfast-network/src/components/calendar/picker-repeat.tsx", "TypeScript React", 0, 32, 0, 0, 5, 4, 41
+"/Users/kaleb/Clients/prayerfast-network/src/components/calendar/picker-time.tsx", "TypeScript React", 0, 154, 0, 0, 6, 19, 179
+"/Users/kaleb/Clients/prayerfast-network/src/components/calendar/picker-week.tsx", "TypeScript React", 0, 67, 0, 0, 14, 9, 90
+"/Users/kaleb/Clients/prayerfast-network/src/components/calendar/radial.tsx", "TypeScript React", 0, 21, 0, 0, 2, 3, 26
+"/Users/kaleb/Clients/prayerfast-network/src/components/calendar/step.tsx", "TypeScript React", 0, 15, 0, 0, 1, 3, 19
+"/Users/kaleb/Clients/prayerfast-network/src/components/cookie-consent/cookie-consent.tsx", "TypeScript React", 0, 49, 0, 0, 4, 9, 62
+"/Users/kaleb/Clients/prayerfast-network/src/components/cookie-consent/index.tsx", "TypeScript React", 0, 2, 0, 0, 0, 1, 3
+"/Users/kaleb/Clients/prayerfast-network/src/components/language-switcher/index.tsx", "TypeScript React", 0, 2, 0, 0, 0, 2, 4
+"/Users/kaleb/Clients/prayerfast-network/src/components/language-switcher/language-switcher.tsx", "TypeScript React", 0, 78, 0, 0, 4, 11, 93
+"/Users/kaleb/Clients/prayerfast-network/src/components/layouts/index.tsx", "TypeScript React", 0, 2, 0, 0, 0, 1, 3
+"/Users/kaleb/Clients/prayerfast-network/src/components/layouts/layout.tsx", "TypeScript React", 0, 25, 0, 0, 3, 7, 35
+"/Users/kaleb/Clients/prayerfast-network/src/components/loader/index.tsx", "TypeScript React", 0, 2, 0, 0, 0, 1, 3
+"/Users/kaleb/Clients/prayerfast-network/src/components/loader/loader.tsx", "TypeScript React", 0, 16, 0, 0, 1, 3, 20
+"/Users/kaleb/Clients/prayerfast-network/src/components/main/index.tsx", "TypeScript React", 0, 2, 0, 0, 0, 1, 3
+"/Users/kaleb/Clients/prayerfast-network/src/components/main/main.tsx", "TypeScript React", 0, 32, 0, 0, 4, 8, 44
+"/Users/kaleb/Clients/prayerfast-network/src/components/navigation/index.tsx", "TypeScript React", 0, 2, 0, 0, 0, 2, 4
+"/Users/kaleb/Clients/prayerfast-network/src/components/navigation/navigation.tsx", "TypeScript React", 0, 141, 0, 0, 64, 19, 224
+"/Users/kaleb/Clients/prayerfast-network/src/components/scoreboard/index.tsx", "TypeScript React", 0, 2, 0, 0, 0, 1, 3
+"/Users/kaleb/Clients/prayerfast-network/src/components/scoreboard/scoreboard.tsx", "TypeScript React", 0, 120, 0, 0, 5, 16, 141
+"/Users/kaleb/Clients/prayerfast-network/src/components/seo/index.tsx", "TypeScript React", 0, 2, 0, 0, 0, 1, 3
+"/Users/kaleb/Clients/prayerfast-network/src/components/seo/seo.tsx", "TypeScript React", 0, 106, 0, 0, 5, 11, 122
+"/Users/kaleb/Clients/prayerfast-network/src/components/shortcodes/button.tsx", "TypeScript React", 0, 19, 0, 0, 1, 3, 23
+"/Users/kaleb/Clients/prayerfast-network/src/components/shortcodes/callout.tsx", "TypeScript React", 0, 26, 0, 0, 2, 5, 33
+"/Users/kaleb/Clients/prayerfast-network/src/components/shortcodes/column.tsx", "TypeScript React", 0, 13, 0, 0, 1, 4, 18
+"/Users/kaleb/Clients/prayerfast-network/src/components/shortcodes/commit-button.tsx", "TypeScript React", 0, 185, 0, 0, 13, 20, 218
+"/Users/kaleb/Clients/prayerfast-network/src/components/shortcodes/components.tsx", "TypeScript React", 0, 14, 0, 0, 0, 5, 19
+"/Users/kaleb/Clients/prayerfast-network/src/components/shortcodes/hero.tsx", "TypeScript React", 0, 34, 0, 0, 2, 5, 41
+"/Users/kaleb/Clients/prayerfast-network/src/components/shortcodes/image-card.tsx", "TypeScript React", 0, 31, 0, 0, 1, 4, 36
+"/Users/kaleb/Clients/prayerfast-network/src/components/shortcodes/index.tsx", "TypeScript React", 0, 15, 0, 0, 2, 2, 19
+"/Users/kaleb/Clients/prayerfast-network/src/components/shortcodes/link.tsx", "TypeScript React", 0, 22, 0, 0, 2, 5, 29
+"/Users/kaleb/Clients/prayerfast-network/src/components/shortcodes/map-dynamic.tsx", "TypeScript React", 0, 162, 0, 0, 33, 34, 229
+"/Users/kaleb/Clients/prayerfast-network/src/components/shortcodes/map-static.tsx", "TypeScript React", 0, 168, 0, 0, 17, 31, 216
+"/Users/kaleb/Clients/prayerfast-network/src/components/shortcodes/map.tsx", "TypeScript React", 0, 15, 0, 0, 3, 5, 23
+"/Users/kaleb/Clients/prayerfast-network/src/components/shortcodes/popup.tsx", "TypeScript React", 0, 20, 0, 0, 1, 3, 24
+"/Users/kaleb/Clients/prayerfast-network/src/components/shortcodes/row.tsx", "TypeScript React", 0, 13, 0, 0, 1, 3, 17
+"/Users/kaleb/Clients/prayerfast-network/src/components/shortcodes/social-share.tsx", "TypeScript React", 0, 74, 0, 0, 5, 5, 84
+"/Users/kaleb/Clients/prayerfast-network/src/gatsby-types.d.ts", "TypeScript", 0, 0, 4123, 0, 24, 474, 4621
+"/Users/kaleb/Clients/prayerfast-network/src/gatsby/create-fields.js", "JavaScript", 0, 0, 0, 33, 2, 9, 44
+"/Users/kaleb/Clients/prayerfast-network/src/gatsby/create-pages.tsx", "TypeScript React", 0, 95, 0, 0, 28, 18, 141
+"/Users/kaleb/Clients/prayerfast-network/src/gatsby/create-resolvers.js", "JavaScript", 0, 0, 0, 49, 46, 1, 96
+"/Users/kaleb/Clients/prayerfast-network/src/gatsby/create-schema-customization.js", "JavaScript", 0, 0, 0, 11, 0, 5, 16
+"/Users/kaleb/Clients/prayerfast-network/src/gatsby/data-props.d.ts", "TypeScript", 0, 0, 24, 0, 4, 4, 32
+"/Users/kaleb/Clients/prayerfast-network/src/gatsby/fragments.ts", "TypeScript", 0, 0, 54, 0, 2, 3, 59
+"/Users/kaleb/Clients/prayerfast-network/src/global.d.ts", "TypeScript", 0, 0, 4, 0, 1, 1, 6
+"/Users/kaleb/Clients/prayerfast-network/src/pages/404.tsx", "TypeScript React", 0, 20, 0, 0, 2, 4, 26
+"/Users/kaleb/Clients/prayerfast-network/src/services/app/app-context.tsx", "TypeScript React", 0, 14, 0, 0, 2, 4, 20
+"/Users/kaleb/Clients/prayerfast-network/src/services/app/app-provider.tsx", "TypeScript React", 0, 80, 0, 0, 6, 11, 97
+"/Users/kaleb/Clients/prayerfast-network/src/services/app/index.tsx", "TypeScript React", 0, 3, 0, 0, 1, 1, 5
+"/Users/kaleb/Clients/prayerfast-network/src/services/geolocation/index.tsx", "TypeScript React", 0, 111, 0, 0, 9, 16, 136
+"/Users/kaleb/Clients/prayerfast-network/src/services/locales/index.tsx", "TypeScript React", 0, 2, 0, 0, 0, 1, 3
+"/Users/kaleb/Clients/prayerfast-network/src/services/locales/locales.tsx", "TypeScript React", 0, 35, 0, 0, 44, 2, 81
+"/Users/kaleb/Clients/prayerfast-network/src/services/locales/path.tsx", "TypeScript React", 0, 5, 0, 0, 6, 1, 12
+"/Users/kaleb/Clients/prayerfast-network/src/styles/global.css", "CSS", 19, 0, 0, 0, 1, 4, 24
+"/Users/kaleb/Clients/prayerfast-network/src/templates/page.tsx", "TypeScript React", 0, 36, 0, 0, 2, 6, 44
+"/Users/kaleb/Clients/prayerfast-network/src/utils/client.tsx", "TypeScript React", 0, 3, 0, 0, 0, 1, 4
+"/Users/kaleb/Clients/prayerfast-network/src/utils/storage.tsx", "TypeScript React", 0, 69, 0, 0, 0, 3, 72
+"/Users/kaleb/Clients/prayerfast-network/src/utils/theme.tsx", "TypeScript React", 0, 5, 0, 0, 0, 1, 6
+"Total", "-", 19, 2799, 4484, 93, 492, 974, 8861

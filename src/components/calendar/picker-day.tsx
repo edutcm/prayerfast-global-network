@@ -5,7 +5,6 @@ import groupBy from "lodash/groupBy";
 
 // import libs
 import { Step } from "./step";
-import { ClockIcon } from "@heroicons/react/outline";
 import { Radial } from "./radial";
 
 export interface DayPickerProps {

@@ -8,7 +8,7 @@ import axios from "axios";
 // import components
 import { AppContext } from "../../services/app";
 import { GatsbyImage, getImage, IGatsbyImageData } from "gatsby-plugin-image";
-import { ChevronDownIcon, ChevronRightIcon } from "@heroicons/react/solid";
+import { FaChevronDown, FaChevronRight } from "react-icons/fa";
 import Scoreboard from "../scoreboard";
 
 interface CommitButtonProps {
@@ -29,13 +29,13 @@ interface CommitButtonProps {
 // toggle arrow component
 const Toggle = ({ active }: { active: boolean }) => {
   const className = active
-    ? "h-5 w-5 mr-6 ml-4 text-gray-800 bg-emerald-500 rounded-full flex-shrink-0"
-    : "h-5 w-5 mr-6 ml-4 text-green-500 bg-gray-700 rounded-full flex-shrink-0";
+    ? "h-5 w-5 mr-6 ml-4 text-gray-800 bg-emerald-500 rounded-full flex-shrink-0 p-1"
+    : "h-5 w-5 mr-6 ml-4 text-green-500 bg-gray-700 rounded-full flex-shrink-0 p-1";
 
   if (active) {
-    return <ChevronDownIcon className={className} />;
+    return <FaChevronDown className={className} />;
   } else {
-    return <ChevronRightIcon className={className} />;
+    return <FaChevronRight className={className} />;
   }
 };
 
@@ -104,8 +104,8 @@ export const CommitButton = ({
     <div
       className={`flex justify-center items-end ${
         !appCookies
-          ? "h-[calc(100vh-190px)] md:h-[calc(100vh-60px)]"
-          : "h-[calc(100vh-100px)] md:h-screen"
+          ? "h-[calc(100vh-110px)] md:h-[calc(100vh-60px)]"
+          : "h-[calc(100vh-10px)] md:h-screen"
       } w-full`}
     >
       <div className="relative z-[9900] w-[95%] md:w-4/5 md:m-5 lg:w-[44%]">

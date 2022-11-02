@@ -9,6 +9,7 @@ import { AppProvider } from "../../services/app";
 // import components
 import Navigation from "../navigation";
 import LanguageSwitcher from "../language-switcher";
+import { MobileMenu } from "../navigation/mobile";
 import Main from "../main";
 
 interface LayoutProps {
@@ -23,13 +24,12 @@ const Layout = ({ children, pageContext, data }: LayoutProps) => {
   return (
     <CookiesProvider>
       <AppProvider locale={page.fields.locale}>
-        <div className="flex flex-col-reverse md:flex-row md:rtl:flex-row-reverse bg-gray-900 font-montserrat">
+        <div className="font-montserrat">
+          <Navigation pageContext={pageContext} locales={locales} />
           <Main>{children}</Main>
-          <div className="w-screen md:w-[100px] h-[90px] md:h-screen">
-            <Navigation pageContext={pageContext} locales={locales} />
-          </div>
         </div>
         <LanguageSwitcher pageContext={pageContext} locales={locales} />
+        <MobileMenu pageContext={pageContext} locales={locales} />
       </AppProvider>
     </CookiesProvider>
   );

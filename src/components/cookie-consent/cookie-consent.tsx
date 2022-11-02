@@ -28,7 +28,7 @@ const CookieConsent = ({ cookieName }: CookieConsentProps) => {
   };
 
   return (
-    <div className="grid grid-cols-7 gap-5 bg-gray-700 text-white w-full h-[100px] md:h-[60px] px-4">
+    <div className="absolute bottom-0 w-full grid grid-cols-7 gap-5 bg-gray-800/80 backdrop-blur-md text-white h-[100px] md:h-[60px] px-4 z-[10000]">
       <div className="col-span-4 md:col-span-6 flex items-center">
         <p className="text-sm">
           We uses cookies to analyze our website traffic.{" "}
