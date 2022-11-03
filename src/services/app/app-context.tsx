@@ -25,7 +25,7 @@ export const defaultState = {
   toggleSwitcher: () => true || false,
   mobileMenu: false,
   setMobileMenu: () => null,
-  appCookies: false,
+  appCookies: true,
   setAppCookies: () => true || false,
   setCookieNotice: () => true || false,
   joinButton: true,
